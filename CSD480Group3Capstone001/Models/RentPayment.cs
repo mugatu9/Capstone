@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CSD480Group3Capstone001.Models
 {
-    //For Nathan: REMEMBER TO SPECIFY COMPOSITE KEYS IN DB CONTEXT (PK: TenatID, UnitID, StartDate)
+    //For Nathan: REMEMBER TO SPECIFY COMPOSITE KEYS IN DB CONTEXT (PK: TenatID, UnitID, Date)
     public class RentPayment
     {
-        public int TenatID { get; set; }
+        public int TenantID { get; set; }
         public int UnitID { get; set; }
 
         [DataType(DataType.Date)]

@@ -34,6 +34,11 @@ namespace CSD480Group3Capstone001.Data
             modelBuilder.Entity<Tenant>().ToTable("Tenant");
             modelBuilder.Entity<Unit>().ToTable("Unit");
             modelBuilder.Entity<Vehicle>().ToTable("Vehicle");
+
+            modelBuilder.Entity<RepairHistory>()
+               .HasKey(o => new {o.ContractorID, o.UnitID, o.StartDate });
+            modelBuilder.Entity<RentPayment>()
+               .HasKey(o => new {o.TenantID, o.UnitID, o.Date });
         }
     }
 }

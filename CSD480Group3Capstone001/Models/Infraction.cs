@@ -9,7 +9,7 @@ namespace CSD480Group3Capstone001.Models
     public class Infraction
     {
         public int InfractionID { get; set; }
-        public int TenatID { get; set; }
+        public int TenantID { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }

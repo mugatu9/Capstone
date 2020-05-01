@@ -8,7 +8,7 @@ namespace CSD480Group3Capstone001.Models
 {
     public class Tenant
     {
-        public int TenatID { get; set; }
+        public int TenantID { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String? Employer { get; set; }

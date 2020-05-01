@@ -22,6 +22,6 @@ namespace CSD480Group3Capstone001.Models
         public decimal Cost { get; set; }
         public bool Paid { get; set; }
         public Unit Unit { get; set; }
-        public Contractor contractor { get; set; }
+        public Contractor Contractor { get; set; }
     }
 }
