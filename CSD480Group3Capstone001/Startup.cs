@@ -27,7 +27,10 @@ namespace CSD480Group3Capstone001
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            /*services.AddDbContext<ApplicationDbContext>(options =>   commented out for now just in case it's necessary later
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));*/
+            services.AddDbContext<PropertyManagementContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
