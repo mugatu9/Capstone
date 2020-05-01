@@ -13,6 +13,6 @@ namespace CSD480Group3Capstone001.Models
         
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
-        public ICollection<Building> Buildings { get; set; }
+        public Building Building { get; set; }
     }
 }

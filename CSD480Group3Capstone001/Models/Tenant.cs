@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSD480Group3Capstone001.Models
 {
-    public class Tenat
+    public class Tenant
     {
         public int TenatID { get; set; }
         public String FirstName { get; set; }

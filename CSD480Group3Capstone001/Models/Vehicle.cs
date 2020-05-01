@@ -14,6 +14,6 @@ namespace CSD480Group3Capstone001.Models
         public String Make { get; set; }
         public int Year { get; set; }
         public String Color { get; set; }
-        public Tenat Tenat { get; set; }
+        public Tenant Tenant { get; set; }
     }
 }

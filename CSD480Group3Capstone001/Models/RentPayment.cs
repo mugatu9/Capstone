@@ -16,7 +16,7 @@ namespace CSD480Group3Capstone001.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
-        public ICollection<Tenat> Tenats { get; set; }
+        public ICollection<Tenant> Tenants { get; set; }
         public ICollection<Unit> Units { get; set; }
     }
 }
