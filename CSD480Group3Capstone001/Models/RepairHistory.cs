@@ -16,7 +16,6 @@ namespace CSD480Group3Capstone001.Models
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public int RepairHistoryID { get; set; }
         public DateTime? FinishDate { get; set; }
         public String Notes { get; set; }
         public decimal Cost { get; set; }
@@ -25,3 +24,4 @@ namespace CSD480Group3Capstone001.Models
         public Contractor Contractor { get; set; }
     }
 
+}
