@@ -19,3 +19,4 @@ namespace CSD480Group3Capstone001.Models
         public Tenant Tenant { get; set; }
     }
 }
+

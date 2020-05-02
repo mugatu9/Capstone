@@ -16,12 +16,12 @@ namespace CSD480Group3Capstone001.Models
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime? FinishDate { get; set; }
         public int RepairHistoryID { get; set; }
+        public DateTime? FinishDate { get; set; }
         public String Notes { get; set; }
         public decimal Cost { get; set; }
         public bool Paid { get; set; }
         public Unit Unit { get; set; }
         public Contractor Contractor { get; set; }
     }
-}
+
