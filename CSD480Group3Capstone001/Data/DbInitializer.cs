@@ -9,7 +9,7 @@ namespace CSD480Group3Capstone001.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(PropertyManagementContext context) {
+        public static void Initialize(ApplicationDbContext context) {
             context.Database.EnsureCreated();
             if (context.Buildings.Any()) {
                 return; // database is already seeded

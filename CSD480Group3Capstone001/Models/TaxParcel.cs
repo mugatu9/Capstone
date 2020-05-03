@@ -8,7 +8,7 @@ namespace CSD480Group3Capstone001.Models
 {
     public class TaxParcel
     {
-        public int TpID { get; set; }
+        public int TaxParcelID { get; set; }
         public int BuildingID { get; set; }
         public int Year { get; set; }
         
