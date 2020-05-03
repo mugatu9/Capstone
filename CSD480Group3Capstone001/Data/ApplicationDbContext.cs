@@ -40,4 +40,5 @@ namespace CSD480Group3Capstone001.Data
             modelBuilder.Entity<RentPayment>()
                .HasKey(o => new { o.TenantID, o.UnitID, o.Date });
         }
+    }
 }
