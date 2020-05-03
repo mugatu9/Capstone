@@ -8,11 +8,12 @@ namespace CSD480Group3Capstone001.Models
 {
     public class TaxParcel
     {
-        public int tpID { get; set; }
+        public int TaxParcelID { get; set; }
+        public int BuildingID { get; set; }
         public int Year { get; set; }
         
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
-        public ICollection<Building> Buildings { get; set; }
+        public Building Building { get; set; }
     }
 }
