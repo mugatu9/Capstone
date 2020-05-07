@@ -10,22 +10,22 @@ using CSD480Group3Capstone001.Models;
 
 namespace CSD480Group3Capstone001.Controllers
 {
-    public class BuildingsController : Controller
+    public class TenantsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BuildingsController(ApplicationDbContext context)
+        public TenantsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Buildings
+        // GET: Tenants
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Buildings.ToListAsync());
+            return View(await _context.Tenants.ToListAsync());
         }
 
-        // GET: Buildings/Details/5
+        // GET: Tenants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace CSD480Group3Capstone001.Controllers
                 return NotFound();
             }
 
-            var building = await _context.Buildings
-                .FirstOrDefaultAsync(m => m.BuildingID == id);
-            if (building == null)
+            var tenant = await _context.Tenants
+                .FirstOrDefaultAsync(m => m.TenantID == id);
+            if (tenant == null)
             {
                 return NotFound();
             }
 
-            return View(building);
+            return View(tenant);
         }
 
-        // GET: Buildings/Create
+        // GET: Tenants/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Buildings/Create
+        // POST: Tenants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BuildingID,Address,City,State,Zip,OrgName")] Building building)
+        public async Task<IActionResult> Create([Bind("TenantID,FirstName,LastName,Employer,Salary,MovedInDate,MovedOutDate")] Tenant tenant)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(building);
+                _context.Add(tenant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(building);
+            return View(tenant);
         }
 
-        // GET: Buildings/Edit/5
+        // GET: Tenants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace CSD480Group3Capstone001.Controllers
                 return NotFound();
             }
 
-            var building = await _context.Buildings.FindAsync(id);
-            if (building == null)
+            var tenant = await _context.Tenants.FindAsync(id);
+            if (tenant == null)
             {
                 return NotFound();
             }
-            return View(building);
+            return View(tenant);
         }
 
-        // POST: Buildings/Edit/5
+        // POST: Tenants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BuildingID,Address,City,State,Zip,OrgName")] Building building)
+        public async Task<IActionResult> Edit(int id, [Bind("TenantID,FirstName,LastName,Employer,Salary,MovedInDate,MovedOutDate")] Tenant tenant)
         {
-            if (id != building.BuildingID)
+            if (id != tenant.TenantID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace CSD480Group3Capstone001.Controllers
             {
                 try
                 {
-                    _context.Update(building);
+                    _context.Update(tenant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BuildingExists(building.BuildingID))
+                    if (!TenantExists(tenant.TenantID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace CSD480Group3Capstone001.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(building);
+            return View(tenant);
         }
 
-        // GET: Buildings/Delete/5
+        // GET: Tenants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace CSD480Group3Capstone001.Controllers
                 return NotFound();
             }
 
-            var building = await _context.Buildings
-                .FirstOrDefaultAsync(m => m.BuildingID == id);
-            if (building == null)
+            var tenant = await _context.Tenants
+                .FirstOrDefaultAsync(m => m.TenantID == id);
+            if (tenant == null)
             {
                 return NotFound();
             }
 
-            return View(building);
+            return View(tenant);
         }
 
-        // POST: Buildings/Delete/5
+        // POST: Tenants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var building = await _context.Buildings.FindAsync(id);
-            _context.Buildings.Remove(building);
+            var tenant = await _context.Tenants.FindAsync(id);
+            _context.Tenants.Remove(tenant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BuildingExists(int id)
+        private bool TenantExists(int id)
         {
-            return _context.Buildings.Any(e => e.BuildingID == id);
+            return _context.Tenants.Any(e => e.TenantID == id);
         }
     }
 }

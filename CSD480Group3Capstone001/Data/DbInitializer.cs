@@ -17,7 +17,7 @@ namespace CSD480Group3Capstone001.Data
 
             var buildings = new Building[]
             {
-                new Building {Address = "503 7th Ave", City = "Kirkland", State = "WA", Zip = 66666, OrgName = "Amazon"}
+                new Building {Address = "503 7th Ave", City = "Kirkland", State = "WA", Zip = 66666, OrgName = "Amazon", TaxParcelYear = 1999, TaxParcelAmount = 666}
 
             };
 
@@ -27,19 +27,6 @@ namespace CSD480Group3Capstone001.Data
             }
             context.SaveChanges();
 
-
-
-            var taxParcels = new TaxParcel[]
-            {
-                new TaxParcel {BuildingID = buildings.Single(b => b.Address == "503 7th Ave").BuildingID,Year = 1999, Amount = 666}
-
-            };
-
-            foreach (TaxParcel t in taxParcels)
-            {
-                context.TaxParcels.Add(t);
-            }
-            context.SaveChanges();
 
 
 
@@ -84,8 +71,6 @@ namespace CSD480Group3Capstone001.Data
 
 
 
-
-
             var tenants = new Tenant[]
                         {
                             new Tenant {FirstName = "Nathan", LastName = "O'Brien", Employer = "The Moon", Salary = 99999999M, MovedInDate = DateTime.Parse("2020-05-01"), MovedOutDate = DateTime.Parse("2020-05-01")}
@@ -96,6 +81,19 @@ namespace CSD480Group3Capstone001.Data
             foreach (Tenant t in tenants)
             {
                 context.Tenants.Add(t);
+            }
+            context.SaveChanges();
+
+            var tenantUnits = new TenantUnit[]
+                        {
+                            new TenantUnit {TenantID = tenants.Single(t => t.LastName == "O'Brien").TenantID, UnitID = units.Single(u => u.UnitNumber == "1A").UnitID}
+
+
+                        };
+
+            foreach (TenantUnit t in tenantUnits)
+            {
+                context.TenantUnits.Add(t);
             }
             context.SaveChanges();
 
@@ -117,7 +115,7 @@ namespace CSD480Group3Capstone001.Data
 
             var rentPayments = new RentPayment[]
                         {
-                            new RentPayment {TenantID = tenants.Single(t => t.LastName == "O'Brien").TenantID, UnitID = units.Single(u => u.UnitNumber == "1A").UnitID, Date = DateTime.Parse("2020-05-01"), Amount = 1200M}
+                            new RentPayment {TenantID = tenants.Single(t => t.LastName == "O'Brien").TenantID, Date = DateTime.Parse("2020-05-01"), Amount = 1200M}
 
                         };
 
