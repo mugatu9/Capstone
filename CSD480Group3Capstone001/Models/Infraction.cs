@@ -16,6 +16,6 @@ namespace CSD480Group3Capstone001.Models
         public String Reason { get; set; }
         public decimal Amount { get; set; }
         public bool Paid { get; set; }
-        public Tenat Tenat { get; set; }
+        public Tenant Tenant { get; set; }
     }
 }

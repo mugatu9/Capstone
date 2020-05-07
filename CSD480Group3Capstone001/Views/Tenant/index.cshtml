@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CSD480Group3Capstone001.Models.Tenant>
+
+@{
+
+    ViewData["Title"] = "Tenants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+
+
+    <div class="container-fluid border border-dark rounded p-2">
+
+        <div class="row">
+            <form class="col-12 mr-auto ml-auto row" asp-controller="Tenant" asp-action="Index">
+                <input type="search" name="searchString" class="border-dark rounded col-10 d-inline" />
+                <button type="submit"  class="btn-primary btn-sm col-2">Search</button>
+            </form>
+        </div>
+        @await Html.PartialAsync("~/Views/Tenant/_TenantAccordion.cshtml", Model)
+    </div>
+
+
+
+

@@ -1,0 +1,67 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Text
+
+@model IEnumerable<CSD480Group3Capstone001.Models.Tenant>
+
+    <div class="row accordion mt-2" id="tenantAccordion">
+        @{
+            int index = 0;
+        }
+        @foreach (var tenant in Model)
+        {
+            <div class="col-11 ml-auto mr-auto">
+                <div class="card-header row border border-dark rounded p-0 mt-2" id="@GetAccordionId("header",index)">
+                    <div class="col-12 d-flex">
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold p-2">Id</span>
+                            <br />#@tenant.TenantID
+                        </div>
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold">First Name</span>
+                            <br />@tenant.FirstName
+                        </div>
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold">Last Name</span>
+                            <br />@tenant.LastName
+                        </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Employer</span>
+                            <br />@tenant.Employer
+                        </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Salary</span>
+                            <br />@string.Format("{0:C}", tenant.Salary)
+                        </div>
+                        <div class="p-2 text-center d-none d-lg-block">
+                            <span class="font-weight-bold">Move In Date</span>
+                            <br />@tenant.MovedInDate.Date.ToString("MM/dd/yyyy")
+                        </div>
+                        <div class="p-2 text-center d-none d-lg-block">
+                            <span class="font-weight-bold">Move Out Date</span>
+                            <br />@tenant.MovedOutDate.Date.ToString("MM/dd/yyyy")
+                        </div>
+                        <div class="p-2 ml-auto align-self-center">
+                            <button id="@GetAccordionId("expand",index)" class="btn-primary d-inline btn-sm" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="@GetAccordionId("body",index)" class="collapse" aria-labelledby="@GetAccordionId("header",index)" data-parent="#tenantAccordion">
+                    <div class="card-body">
+                        @await Html.PartialAsync("~/Views/Tenant/_DisplayTenant.cshtml", tenant)
+                    </div>
+                </div>
+            </div>
+            index++;
+        }
+    </div>
+
+
+
+
+
+@functions{
+    public string GetAccordionId(string str,int num)
+    {
+        return str + num.ToString();
+    }
+}
