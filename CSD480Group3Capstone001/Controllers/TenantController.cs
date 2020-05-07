@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using CSD480Group3Capstone001.Models;
 using CSD480Group3Capstone001.Views.Tenant;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CSD480Group3Capstone001.Controllers
 {
+    [Authorize]
     public class TenantController : Controller
     {
 
