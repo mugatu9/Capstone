@@ -278,5 +278,3 @@ C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreap
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.dll
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.pdb
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.genruntimeconfig.cache
-C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Admin\Index.cshtml.g.cs
-C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Manager\Index.cshtml.g.cs
