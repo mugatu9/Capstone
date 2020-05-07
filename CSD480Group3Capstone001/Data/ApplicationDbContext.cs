@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CSD480Group3Capstone001.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
