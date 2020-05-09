@@ -22,6 +22,7 @@ namespace CSD480Group3Capstone001.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? MovedOutDate { get; set; }
         public ICollection<Infraction> Infractions { get; set; }
+        public ICollection<TenantUnit> TenantUnits { get; set; }
         public ICollection<RentPayment> RentPayments { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
 

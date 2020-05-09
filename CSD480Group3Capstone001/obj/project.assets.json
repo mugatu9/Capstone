@@ -8812,19 +8812,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sajan\\.nuget\\packages\\": {}
+    "C:\\Users\\natha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+      "projectUniqueName": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
       "projectName": "CSD480Group3Capstone001",
-      "projectPath": "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
-      "packagesPath": "C:\\Users\\sajan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\obj\\",
+      "projectPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+      "packagesPath": "C:\\Users\\natha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sajan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\natha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

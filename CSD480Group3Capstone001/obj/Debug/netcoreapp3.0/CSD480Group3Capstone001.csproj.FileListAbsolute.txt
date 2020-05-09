@@ -312,3 +312,13 @@ C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreap
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.dll
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.pdb
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.genruntimeconfig.cache
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\Create.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\Delete.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\Details.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\Edit.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\Index.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Create.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Delete.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Details.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Edit.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Index.cshtml.g.cs

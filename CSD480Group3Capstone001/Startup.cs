@@ -59,8 +59,8 @@ namespace CSD480Group3Capstone001
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            /*app.UseAuthentication();
+            app.UseAuthorization();*/
 
             app.UseEndpoints(endpoints =>
             {
