@@ -12,6 +12,8 @@ using CSD480Group3Capstone001.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CSD480Group3Capstone001
 {
@@ -31,9 +33,20 @@ namespace CSD480Group3Capstone001
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddControllers(config =>
+            {
+                // using Microsoft.AspNetCore.Mvc.Authorization;
+                // using Microsoft.AspNetCore.Authorization;
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +78,37 @@ namespace CSD480Group3Capstone001
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            IdentityResult roleResult;
+            //Adding Addmin Role    
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //create the roles and seed them to the database    
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            roleCheck = await RoleManager.RoleExistsAsync("Manager");
+            if (!roleCheck)
+            {
+                //create the roles and seed them to the database    
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Manager"));
+            }
+
+            //Assign Admin role to the main User here we have given our newly loregistered login id for Admin management    
+            IdentityUser user = await UserManager.FindByEmailAsync("admin@test.com");
+            var User = new IdentityUser();
+            await UserManager.AddToRoleAsync(user, "Admin");
+
+            user = await UserManager.FindByEmailAsync("manager@test.com");
+            await UserManager.AddToRoleAsync(user, "Manager");
+
         }
     }
 }

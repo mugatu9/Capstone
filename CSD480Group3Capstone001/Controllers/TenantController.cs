@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CSD480Group3Capstone001.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class TenantController : Controller
     {
 

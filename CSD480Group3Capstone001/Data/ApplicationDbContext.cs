@@ -14,5 +14,6 @@ namespace CSD480Group3Capstone001.Data
         {
         }
         public DbSet<CSD480Group3Capstone001.Models.Tenant> Tenant { get; set; }
+        public DbSet<CSD480Group3Capstone001.Models.Vehicle> Vehicle { get; set; }
     }
 }
