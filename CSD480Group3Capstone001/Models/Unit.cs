@@ -14,7 +14,7 @@ namespace CSD480Group3Capstone001.Models
         public int SqrFootage { get; set; }
         public Building Building { get; set; }
         public ICollection<RepairHistory> RepairHistories { get; set; }
-        public ICollection<RentPayment> RentPayments { get; set; }
+        public ICollection<TenantUnit> TenantUnits { get; set; }
 
     }
 }
