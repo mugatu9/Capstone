@@ -176,13 +176,13 @@ namespace CSD480Group3Capstone001.Controllers
                         tenants = (_context.Tenants.Where(s => s.FirstName.ToLower().Contains(searchString) || s.LastName.ToLower().Contains(searchString) || (s.FirstName.ToLower() + " " + s.LastName.ToLower()).Contains(searchString))).ToList();
                         break;
                     case "Unit":
-                        //implement search query
+                        //TODO: implement search query
                         break;
                     case "Building":
-                        //implement search query
+                        //TODO: implement search query
                         break;
-                    case "License":
-                        //implement search query
+                    case "License Plate":
+                        //TODO: implement search query
                         break;
                     default:
                         // code block
