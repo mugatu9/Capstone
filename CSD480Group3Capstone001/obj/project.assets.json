@@ -8812,19 +8812,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\natha\\.nuget\\packages\\": {}
+    "C:\\Users\\dawki\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+      "projectUniqueName": "C:\\Users\\dawki\\Source\\Repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
       "projectName": "CSD480Group3Capstone001",
-      "projectPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
-      "packagesPath": "C:\\Users\\natha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\obj\\",
+      "projectPath": "C:\\Users\\dawki\\Source\\Repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+      "packagesPath": "C:\\Users\\dawki\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dawki\\Source\\Repos\\Capstone\\CSD480Group3Capstone001\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\natha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dawki\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8898,7 +8898,7 @@
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.0.3, 3.0.3]"
+            "version": "[3.0.2, 3.0.2]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
@@ -8917,7 +8917,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
