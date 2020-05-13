@@ -149,48 +149,5 @@ namespace CSD480Group3Capstone001.Controllers
         {
             return _context.Tenants.Any(e => e.TenantID == id);
         }
-
-        // GET: Tenants/Create
-        public IActionResult Search()
-        {
-            return View(_context.Tenants.ToList());
-        }
-
-        // POST: Tenants/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search(string searchString, string searchBy )
-        {
-            List<Tenant> tenants = _context.Tenants.ToList();
-
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy))
-            {
-                ViewData["searchString"] = searchString;
-                ViewData["searchBy"] = searchBy;
-                searchString = searchString.ToLower();
-                switch (searchBy)
-                {
-                    case "Name":
-                        tenants = (_context.Tenants.Where(s => s.FirstName.ToLower().Contains(searchString) || s.LastName.ToLower().Contains(searchString) || (s.FirstName.ToLower() + " " + s.LastName.ToLower()).Contains(searchString))).ToList();
-                        break;
-                    case "Unit":
-                        //TODO: implement search query
-                        break;
-                    case "Building":
-                        //TODO: implement search query
-                        break;
-                    case "License Plate":
-                        //TODO: implement search query
-                        break;
-                    default:
-                        // code block
-                        break;
-                }
-                
-            }
-            return View(tenants);
-        }
     }
 }
