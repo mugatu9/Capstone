@@ -182,7 +182,13 @@ namespace CSD480Group3Capstone001.Controllers
                         //TODO: implement search query
                         break;
                     case "License Plate":
-                        //TODO: implement search query
+                    //TODO: implement search query
+                    case "Delinquent Rent":
+                        tenants = (from T in _context.Tenants 
+                                   join R in _context.RentPayments on T.TenantID equals R.TenantID
+                                   where DateTime.Now.Subtract(R.Date).Days > 30
+                                   select T).ToList();
+
                         break;
                         //TODO: add more search cases and queries
                     default:
