@@ -1,9 +1,11 @@
 ﻿@using System.Runtime.CompilerServices
 @using System.Text
+@using CSD480Group3Capstone001.Controllers
 
 @model IEnumerable<CSD480Group3Capstone001.Models.Tenant>
 
-    <div class="row accordion mt-2" id="tenantAccordion">
+
+<div class="row accordion mt-2" id="tenantAccordion">
         @{
             int index = 0;
         }
@@ -17,26 +19,14 @@
                             <br />#@tenant.TenantID
                         </div>
                         <div class="p-2 text-center">
-                            <span class="font-weight-bold">First Name</span>
-                            <br />@tenant.FirstName
-                        </div>
-                        <div class="p-2 text-center">
-                            <span class="font-weight-bold">Last Name</span>
-                            <br />@tenant.LastName
+                            <span class="font-weight-bold">Tenant Name</span>
+                            <br />@tenant.FirstName @tenant.LastName
                         </div>
                         <div class="p-2 text-center d-none d-sm-block">
-                            <span class="font-weight-bold">Employer</span>
-                            <br />@tenant.Employer
-                        </div>
-                        <div class="p-2 text-center d-none d-sm-block">
-                            <span class="font-weight-bold">Salary</span>
-                            <br />@string.Format("{0:C}", tenant.Salary)
-                        </div>
-                        <div class="p-2 text-center d-none d-lg-block">
                             <span class="font-weight-bold">Move In Date</span>
                             <br />@tenant.MovedInDate.Date.ToString("MM/dd/yyyy")
                         </div>
-                        <div class="p-2 text-center d-none d-lg-block">
+                        <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Move Out Date</span>
                             <br />@tenant.MovedOutDate
                         </div>
@@ -47,7 +37,7 @@
                 </div>
                 <div id="@GetAccordionId("body",index)" class="collapse" aria-labelledby="@GetAccordionId("header",index)" data-parent="#tenantAccordion">
                     <div class="card-body">
-                        @await Html.PartialAsync("~/Views/Tenants/_DisplayTenant.cshtml", tenant)
+                        @await Html.PartialAsync("~/Views/Tenants/_DisplayTenant.cshtml", tenant,new ViewDataDictionary(ViewData))
                     </div>
                 </div>
             </div>
@@ -60,8 +50,26 @@
 
 
 @functions{
-    public string GetAccordionId(string str,int num)
+    private string GetAccordionId(string str,int num)
     {
         return str + num.ToString();
+    }
+
+    private void DisplaySearchedCat()
+    {
+        List<string> searchAreas = (List<string>)ViewData["searchAreas"];
+        string searchBy = (string)ViewData["searchBy"];
+
+        if (!string.IsNullOrEmpty(searchBy))
+        {
+            if (!searchBy.Equals(searchAreas[0]))//Do nothing Name is always displayed
+            {
+                
+
+            }else if (searchBy.Equals(searchAreas[1]))//License Plate
+            {
+
+            }
+        }
     }
 }
