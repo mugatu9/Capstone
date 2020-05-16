@@ -184,10 +184,15 @@ namespace CSD480Group3Capstone001.Controllers
                     case "License Plate":
                     //TODO: implement search query
                     case "Delinquent Rent":
-                        tenants = (from T in _context.Tenants 
-                                   join R in _context.RentPayments on T.TenantID equals R.TenantID
-                                   where DateTime.Now.Subtract(R.Date).Days > 30
-                                   select T).ToList();
+                        var goodTenants = from R in _context.RentPayments join
+                                          T in _context.Tenants on R.TenantID equals T.TenantID
+                                           where (R.Date < DateTime.Now && R.Date > DateTime.Now.AddDays(-30)) //DateTime.Now.Subtract(R.Date).Days > 30
+                                           select T;
+                        var allTenants = from T in _context.Tenants
+                                         select T;
+                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
+                        tenants = (from T in badTenants
+                                  select T).ToList();
 
                         break;
                         //TODO: add more search cases and queries

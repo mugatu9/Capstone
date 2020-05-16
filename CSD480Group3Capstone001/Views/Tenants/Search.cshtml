@@ -34,7 +34,7 @@
                 <div class="flex-grow-1 ml-1 mr-1 mb-1">
                     <select class="custom-select border-dark" name="searchBy" id="searchForSelect">
                         @{
-                            List<string> searchAreas = new List<string>() { "Name", "License Plate", "Unit", "Building" };
+                            List<string> searchAreas = new List<string>() { "Name", "License Plate", "Unit", "Building", "Delinquent Rent" };
 
                             string searchBy = (string) ViewData["searchBy"];
                             if (!string.IsNullOrEmpty(searchBy))
