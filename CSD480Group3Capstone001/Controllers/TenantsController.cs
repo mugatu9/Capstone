@@ -186,8 +186,8 @@ namespace CSD480Group3Capstone001.Controllers
                     case "Delinquent Rent":
                         var goodTenants = from R in _context.RentPayments join
                                           T in _context.Tenants on R.TenantID equals T.TenantID
-                                           where (R.Date < DateTime.Now && R.Date > DateTime.Now.AddDays(-30)) //DateTime.Now.Subtract(R.Date).Days > 30
-                                           select T;
+                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
+                                          select T;
                         var allTenants = from T in _context.Tenants
                                          select T;
                         var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
