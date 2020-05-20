@@ -196,22 +196,17 @@ namespace CSD480Group3Capstone001.Controllers
 
                         break;
                     case "Test":
-                        var openWorkOrders = (from B in _context.Buildings join 
-                                              U in _context.Units on B.BuildingID equals U.BuildingID join
-                                              R in _context.RepairHistories on U.UnitID equals R.UnitID join
-                                              C in _context.Contractors on R.ContractorID equals C.ContractorID
-                                              where R.FinishDate == null
-                                              select new{
-                                                 address = B.Address,
-                                                 contractor = C.Company,
-                                                 unit = U.UnitNumber,
-                                                 startDate = R.StartDate,
-                                                 notes = R.Notes,
-                                                 cost = R.Cost,
-                                                 paid = R.Paid
-                                              }
-                                              ).ToList();
-                        
+                        int unitId = 5; // this will be a parameter passed to this query through a function
+                        var unitTenants = from U in _context.Units join
+                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
+                                               where U.UnitID == unitId
+                                               select T;
+                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                     
+                        tenants.Clear();
+                        tenants.Add(mostRecentTenant);
+
                         break;
                         //TODO: add more search cases and queries
                     default:
@@ -247,5 +242,14 @@ var openWorkOrders = (from B in _context.Buildings join
                                               ).ToList();
 9.
 
-
+    int unitId = 5; // this will be a parameter passed to this query through a function
+                        var unitTenants = from U in _context.Units join
+                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
+                                               where U.UnitID == unitId
+                                               select T;
+                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                     
+                        tenants.Clear();
+                        tenants.Add(mostRecentTenant);
 */
