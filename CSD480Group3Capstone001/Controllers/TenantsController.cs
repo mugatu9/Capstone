@@ -7,16 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
-using System.Collections;
 
 namespace CSD480Group3Capstone001.Controllers
 {
-    [Route("api/Tenants")]
-    [ApiController]
     public class TenantsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public static ArrayList UserData = new ArrayList();
 
         public TenantsController(ApplicationDbContext context)
         {
@@ -136,40 +132,6 @@ namespace CSD480Group3Capstone001.Controllers
             }
 
             return View(tenant);
-        }
-
-        [HttpGet("GetTenant/{id}")]
-
-        public ActionResult<Tenant> GetTenant(int id)
-        {
-            Tenant tenant = _context.Tenants.Find(id);
-            if (tenant == null)
-            {
-                return NotFound();
-            }
-            return tenant;
-        }
-        
-
-        [HttpGet("GetAllTenants")]
-        
-
-        public List<Tenant> GetTenant()
-        {
-            // Return all Users
-            return _context.Tenants.ToList();
-        }
-
-
-
-        [HttpPost]
-        public async Task<ActionResult<Tenant>> PostTenant(Tenant tenant)
-        {
-            _context.Tenants.Add(tenant);
-            await _context.SaveChangesAsync();
-
-           
-            return CreatedAtAction(nameof(GetTenant), new { id = tenant.TenantID }, tenant);
         }
 
         // POST: Tenants/Delete/5
