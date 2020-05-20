@@ -10,6 +10,8 @@ using CSD480Group3Capstone001.Models;
 
 namespace CSD480Group3Capstone001.Controllers
 {
+    [Route("api/Tenants")]
+    [ApiController]
     public class TenantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -193,5 +195,27 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(tenants);
         }
+        [HttpGet("GetTenant/{id}")]
+
+        public ActionResult<Tenant> GetTenant(int id)
+        {
+            Tenant tenant = _context.Tenants.Find(id);
+            if (tenant == null)
+            {
+                return NotFound();
+            }
+            return tenant;
+        }
+
+
+        [HttpGet("GetAllTenants")]
+
+
+        public List<Tenant> GetTenant()
+        {
+            // Return all Users
+            return _context.Tenants.ToList();
+        }
+
     }
 }

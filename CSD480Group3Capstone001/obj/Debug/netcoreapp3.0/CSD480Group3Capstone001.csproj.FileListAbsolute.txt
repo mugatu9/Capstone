@@ -332,3 +332,6 @@ C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreap
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Details.cshtml.g.cs
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Edit.cshtml.g.cs
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Index.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\Search.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\_DisplayTenant.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Tenants\_tenantAccordion.cshtml.g.cs
