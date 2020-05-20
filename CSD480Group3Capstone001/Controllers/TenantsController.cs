@@ -195,7 +195,24 @@ namespace CSD480Group3Capstone001.Controllers
                                   select T).ToList();
 
                         break;
-                  
+                    case "Test":
+                        var openWorkOrders = (from B in _context.Buildings join 
+                                              U in _context.Units on B.BuildingID equals U.BuildingID join
+                                              R in _context.RepairHistories on U.UnitID equals R.UnitID join
+                                              C in _context.Contractors on R.ContractorID equals C.ContractorID
+                                              where R.FinishDate == null
+                                              select new{
+                                                 address = B.Address,
+                                                 contractor = C.Company,
+                                                 unit = U.UnitNumber,
+                                                 startDate = R.StartDate,
+                                                 notes = R.Notes,
+                                                 cost = R.Cost,
+                                                 paid = R.Paid
+                                              }
+                                              ).ToList();
+                        
+                        break;
                         //TODO: add more search cases and queries
                     default:
                         // code block
@@ -213,7 +230,21 @@ List<Contractor> usedContractors = (from C in _context.Contractors join
                                                R in _context.RepairHistories on C.ContractorID equals R.ContractorID
                                                select C).ToList();
 8.
-
+var openWorkOrders = (from B in _context.Buildings join 
+                                              U in _context.Units on B.BuildingID equals U.BuildingID join
+                                              R in _context.RepairHistories on U.UnitID equals R.UnitID join
+                                              C in _context.Contractors on R.ContractorID equals C.ContractorID
+                                              where R.FinishDate == null
+                                              select new{
+                                                 address = B.Address,
+                                                 contractor = C.Company,
+                                                 unit = U.UnitNumber,
+                                                 startDate = R.StartDate,
+                                                 notes = R.Notes,
+                                                 cost = R.Cost,
+                                                 paid = R.Paid
+                                              }
+                                              ).ToList();
 9.
 
 
