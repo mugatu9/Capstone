@@ -195,6 +195,7 @@ namespace CSD480Group3Capstone001.Controllers
                                   select T).ToList();
 
                         break;
+                  
                         //TODO: add more search cases and queries
                     default:
                         // code block
@@ -206,3 +207,14 @@ namespace CSD480Group3Capstone001.Controllers
         }
     }
 }
+/* user story queries
+7.
+List<Contractor> usedContractors = (from C in _context.Contractors join
+                                               R in _context.RepairHistories on C.ContractorID equals R.ContractorID
+                                               select C).ToList();
+8.
+
+9.
+
+
+*/
