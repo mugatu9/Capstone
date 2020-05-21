@@ -199,7 +199,7 @@ namespace CSD480Group3Capstone001.Controllers
                         var allTenants = from T in _context.Tenants
                                          select T;
                         var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
-                        tenants = (from T in badTenants
+                        dyTenants = (from T in badTenants
                                   select T).ToList();
 
                         break;
@@ -212,8 +212,8 @@ namespace CSD480Group3Capstone001.Controllers
                                                select T;
                         Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
                      
-                        tenants.Clear();
-                        tenants.Add(mostRecentTenant);
+                        dyTenants.Clear();
+                        dyTenants.Add(mostRecentTenant);
 
                         break;
                         //TODO: add more search cases and queries
