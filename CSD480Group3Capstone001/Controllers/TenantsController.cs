@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -150,22 +154,24 @@ namespace CSD480Group3Capstone001.Controllers
             return _context.Tenants.Any(e => e.TenantID == id);
         }
 
-        // GET: Tenants/Create
-        public IActionResult Search()
+        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit", "Building", "Employer", "Delinquent Rent", "Test" };//this is where you put more option for the drop down
+
+    // GET: Tenants/Search
+    public IActionResult Search()
         {
-            return View(_context.Tenants.ToList());
+            return View(GetFullTenants());
         }
 
-        // POST: Tenants/Create
+        // POST: Tenants/Search
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Search(string searchString, string searchBy )
         {
-            List<Tenant> tenants = _context.Tenants.ToList();
+            List<Tenant> dyTenants = GetFullTenants();
 
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && tenants.Count() > 0)
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && dyTenants.Count() > 0)
             {
                 ViewData["searchString"] = searchString;
                 ViewData["searchBy"] = searchBy;
@@ -173,7 +179,11 @@ namespace CSD480Group3Capstone001.Controllers
                 switch (searchBy)
                 {
                     case "Name":
-                        tenants = (_context.Tenants.Where(s => s.FirstName.ToLower().Contains(searchString) || s.LastName.ToLower().Contains(searchString) || (s.FirstName.ToLower() + " " + s.LastName.ToLower()).Contains(searchString))).ToList();
+                        dyTenants = dyTenants.Where(t => t.FirstName.ToLower().Contains(searchString) || t.LastName.ToLower().Contains(searchString) || (t.FirstName.ToLower() + " " + t.LastName.ToLower()).Contains(searchString)).ToList();
+                        break;
+                    case "License Plate":
+                        List<int> tenantIds = (_context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString))).Select(v => v.TenantID).ToList();
+                        dyTenants = dyTenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
                     case "Unit":
                         //TODO: implement search query
@@ -181,17 +191,113 @@ namespace CSD480Group3Capstone001.Controllers
                     case "Building":
                         //TODO: implement search query
                         break;
-                    case "License Plate":
-                        //TODO: implement search query
+                    case "Delinquent Rent":
+                        var goodTenants = from R in _context.RentPayments join
+                                          T in _context.Tenants on R.TenantID equals T.TenantID
+                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
+                                          select T;
+                        var allTenants = from T in _context.Tenants
+                                         select T;
+                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
+                        tenants = (from T in badTenants
+                                  select T).ToList();
+
+                        break;
+                    case "Test":
+                        int unitId = 5; // this will be a parameter passed to this query through a function
+                        var unitTenants = from U in _context.Units join
+                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
+                                               where U.UnitID == unitId
+                                               select T;
+                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                     
+                        tenants.Clear();
+                        tenants.Add(mostRecentTenant);
+
                         break;
                         //TODO: add more search cases and queries
+                    case "Employer":
+                        dyTenants = dyTenants.Where(t => t.Employer.ToLower().Contains(searchString)).ToList();
+                        break;
+                    //TODO: add more search cases and queries, make sure to add the case string to the searchAreas list
                     default:
                         // code block
                         break;
                 }
                 
             }
-            return View(tenants);
+            return View(dyTenants);
         }
+
+        public List<Tenant> GetFullTenants()
+        {
+            List<Tenant> tempTenants = new List<Tenant>();
+            foreach (Tenant t in _context.Tenants)
+            {
+                tempTenants.Add(GetFullTenant(t));
+            }
+
+            return tempTenants;
+        }
+        public Tenant GetFullTenant(Tenant tenant)
+        {
+            Tenant t = new Tenant
+            {
+                FirstName = tenant.FirstName,
+                LastName = tenant.LastName,
+                TenantID = tenant.TenantID,
+                Employer = tenant.Employer,
+                Salary = tenant.Salary,
+                MovedInDate = tenant.MovedInDate,
+                MovedOutDate = tenant.MovedOutDate,
+                Infractions = _context.Infractions.Where(i => i.TenantID.Equals(tenant.TenantID)).ToList(),
+                Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(tenant.TenantID)).ToList(),
+                RentPayments = _context.RentPayments.Where(r => r.TenantID.Equals(tenant.TenantID)).ToList(),
+                TenantUnits = _context.TenantUnits.Where(t => t.TenantID.Equals(tenant.TenantID)).ToList()
+            };
+
+            return t;
+        }
+
+        public static List<string> GetSearchAreas()
+        {
+            return new List<string>(SearchAreas);
+        }
+
     }
 }
+/* user story queries
+7.
+List<Contractor> usedContractors = (from C in _context.Contractors join
+                                               R in _context.RepairHistories on C.ContractorID equals R.ContractorID
+                                               select C).ToList();
+8.
+var openWorkOrders = (from B in _context.Buildings join 
+                                              U in _context.Units on B.BuildingID equals U.BuildingID join
+                                              R in _context.RepairHistories on U.UnitID equals R.UnitID join
+                                              C in _context.Contractors on R.ContractorID equals C.ContractorID
+                                              where R.FinishDate == null
+                                              select new{
+                                                 address = B.Address,
+                                                 contractor = C.Company,
+                                                 unit = U.UnitNumber,
+                                                 startDate = R.StartDate,
+                                                 notes = R.Notes,
+                                                 cost = R.Cost,
+                                                 paid = R.Paid
+                                              }
+                                              ).ToList();
+9.
+
+    int unitId = 5; // this will be a parameter passed to this query through a function
+                        var unitTenants = from U in _context.Units join
+                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
+                                               where U.UnitID == unitId
+                                               select T;
+                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                     
+                        tenants.Clear();
+                        tenants.Add(mostRecentTenant);
+*/
