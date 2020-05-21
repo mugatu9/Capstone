@@ -1,11 +1,11 @@
-﻿@using CSD480Group3Capstone001.Controllers
+@using CSD480Group3Capstone001.Controllers
 
 @model IEnumerable<CSD480Group3Capstone001.Models.Tenant>
 
 @{
-    ViewData["currPage"] = "Tenants";
+
     ViewData["Title"] = "Tenants";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
     /*
      *
@@ -16,7 +16,9 @@
 
 
 
-<div class="border border-dark rounded p-2 pt-3">
+<div class="border border-dark rounded p-2">
+    <h2>Tenant Search</h2>
+    <hr class="border-dark" />
     <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Tenants" asp-action="Search">
         <div class="col-12 d-flex p-0 flex-wrap">
             <button type="submit" class="btn-sm border border-dark btn-primary ml-1 mr-1 mb-1">Search</button>
@@ -31,10 +33,10 @@
                 }
             }
 
+
             <div class="flex-grow-1 ml-1 mr-1 mb-1">
                 <select class="custom-select border-dark" name="searchBy" id="searchForSelect">
                     @{
-
                         List<string> searchAreas = TenantsController.GetSearchAreas();
 
                         string searchBy = (string)ViewData["searchBy"];
@@ -68,8 +70,4 @@
         }
     }
 </div>
-
-
-
-
 
