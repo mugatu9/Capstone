@@ -156,5 +156,88 @@ namespace CSD480Group3Capstone001.Controllers
         {
             return _context.Units.Any(e => e.UnitID == id);
         }
+
+        private static readonly List<string> SearchAreas = new List<string>() { "Name", "License Plate", "Unit", "Building", "Employer" };//this is where you put more option for the drop down
+
+        // GET: Tenants/Search
+        public IActionResult Search()
+        {
+            return View(GetFullUnits());
+        }
+
+        // POST: Tenants/Search
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Search(string searchString, string searchBy)
+        {
+            List<Unit> dyUnits = GetFullUnits();
+
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && dyUnits.Count() > 0)
+            {
+                ViewData["searchString"] = searchString;
+                ViewData["searchBy"] = searchBy;
+                searchString = searchString.ToLower();
+                switch (searchBy)
+                {
+                    case "Name":
+                        //TODO: implement search query
+                        break;
+                    case "License Plate":
+                        //TODO: implement search query
+                        break;
+                    case "Unit":
+                        //TODO: implement search query
+                        break;
+                    case "Building":
+                        //TODO: implement search query
+                        break;
+                    case "Employer":
+                        //TODO: implement search query
+                        break;
+                    //TODO: add more search cases and queries, make sure to add the case string to the searchAreas list
+                    default:
+                        // code block
+                        break;
+                }
+
+            }
+            return View(dyUnits);
+        }
+
+        public List<Unit> GetFullUnits()
+        {
+            List<Unit> tempUnits = new List<Unit>();
+            foreach (Unit u in _context.Units)
+            {
+                tempUnits.Add(GetFullUnit(u));
+            }
+
+            return tempUnits;
+        }
+        public Unit GetFullUnit(Unit unit)
+        {
+            Unit u = new Unit
+            {
+                UnitID = unit.UnitID,
+                BuildingID = unit.BuildingID,
+                UnitNumber = unit.UnitNumber,
+                SqrFootage = unit.SqrFootage,
+                Building   = _context.Buildings.Where(b=>b.BuildingID.Equals(unit.BuildingID)).ToList()[0],
+                RepairHistories = _context.RepairHistories.Where(r => r.UnitID.Equals(unit.UnitID)).ToList(),
+                TenantUnits = _context.TenantUnits.Where(t => t.UnitID.Equals(unit.UnitID)).ToList()
+            };
+            foreach (TenantUnit tu in u.TenantUnits)
+            {
+                tu.tenant = _context.Tenants.Where(t => t.TenantID == tu.TenantID).ToList()[0];
+            }
+            return u;
+        }
+
+        public static List<string> GetSearchAreas()
+        {
+            return new List<string>(SearchAreas);
+        }
     }
 }

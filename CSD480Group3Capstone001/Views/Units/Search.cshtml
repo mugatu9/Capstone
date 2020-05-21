@@ -1,10 +1,10 @@
 ﻿@using CSD480Group3Capstone001.Controllers
 
-@model IEnumerable<CSD480Group3Capstone001.Models.Tenant>
+@model IEnumerable<CSD480Group3Capstone001.Models.Unit>
 
 @{
-    ViewData["currPage"] = "Tenants";
-    ViewData["Title"] = "Tenants";
+    ViewData["currPage"] = "Units";
+    ViewData["Title"] = "Units";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 
     /*
@@ -17,7 +17,7 @@
 
 
 <div class="border border-dark rounded p-2 pt-3">
-    <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Tenants" asp-action="Search">
+    <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Units" asp-action="Search">
         <div class="col-12 d-flex p-0 flex-wrap">
             <button type="submit" class="btn-sm border border-dark btn-primary ml-1 mr-1 mb-1">Search</button>
             @{
@@ -35,7 +35,7 @@
                 <select class="custom-select border-dark" name="searchBy" id="searchForSelect">
                     @{
 
-                        List<string> searchAreas = TenantsController.GetSearchAreas();
+                        List<string> searchAreas = UnitsController.GetSearchAreas();
 
                         string searchBy = (string)ViewData["searchBy"];
                         if (!string.IsNullOrEmpty(searchBy))
@@ -60,7 +60,7 @@
     @{
         if (Model.Any())
         {
-            @await Html.PartialAsync("~/Views/Tenants/_TenantAccordion.cshtml", Model, new ViewDataDictionary(ViewData));
+            @await Html.PartialAsync("~/Views/Units/_UnitAccordion.cshtml", Model, new ViewDataDictionary(ViewData));
         }
         else
         {
