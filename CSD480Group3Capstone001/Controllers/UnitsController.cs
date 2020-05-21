@@ -156,5 +156,45 @@ namespace CSD480Group3Capstone001.Controllers
         {
             return _context.Units.Any(e => e.UnitID == id);
         }
+		
+		
+		
+		
+		
+		
+		
+		//Query to get REPAIR HISTORY of a unit::
+        public async Task<IActionResult> ViewRepairHistory(int? id)
+        {
+            if (id == null) return NotFound();
+         
+            var repHist = await _context.RepairHistories.FindAsync(id);
+            await _context.RepairHistories
+                .Include(r => r.Unit.RepairHistories)
+                .FirstOrDefaultAsync(r => r.UnitID == id);
+
+            if (repHist == null) return NotFound();
+            
+            return View(repHist);
+        }
+
+
+
+
+        //Get the TAX INFORMATION of a unit::
+        public async Task<IActionResult> TaxInfo(int? id)
+        {
+            if (id == null) return NotFound();
+
+
+            var tax = await _context.Buildings
+                .Include(t => t.TaxParcelAmount)
+                .Include(y => y.TaxParcelYear)
+                .FirstOrDefaultAsync(t => t.BuildingID == id);
+		
+		
+		
+		
+		
     }
 }
