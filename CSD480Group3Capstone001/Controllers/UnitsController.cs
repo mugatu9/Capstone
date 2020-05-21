@@ -276,7 +276,7 @@ namespace CSD480Group3Capstone001.Controllers
                 .Include(t => t.TaxParcelAmount)
                 .Include(y => y.TaxParcelYear)
                 .FirstOrDefaultAsync(t => t.BuildingID == id);
-		        return(tax);
+		        return View(tax);
 		    }
     }
 }
