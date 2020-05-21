@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CSD480 Group3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .inactive:hover {
+            border: black 1px solid !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar border-bottom box-shadow mb-3">
+            <div class="container d-flex">
+        <a class="navbar-brand  flex-fill d-flex flex-wrap" asp-area="" asp-controller="Home" asp-action="Index"><div class="text-xl-left text-dark mr-1 font-weight-bold">CSD480 Group3 </div><div class="text-xl-left text-dark font-weight-bold">Property Management System</div></a>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <div class="d-flex flex-wrap mb-2">
+
+            @{
+                if (!string.IsNullOrEmpty(ViewData["currPage"].ToString()))
+                {
+                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Overview</a></div>
+                    if (ViewData["currPage"].Equals("Tenants"))
+                    {
+                        <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
+                    }
+                    else
+                    {
+                        <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
+                    }
+                    if (ViewData["currPage"].Equals("Units"))
+                    {
+                        <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
+                    }
+                    else
+                    {
+                        <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
+                    }
+                    <div id="Work Orders" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Work Orders</a></div>
+                    <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Accounting</a></div>
+                }
+                else
+                {
+                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Overview</a></div>
+                    <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
+                    <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
+                    <div id="Work Orders" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Work Orders</a></div>
+                    <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Accounting</a></div>
+                }
+            }
+        </div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - CSD480Group3Capstone001 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

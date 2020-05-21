@@ -256,7 +256,6 @@ namespace CSD480Group3Capstone001.Controllers
                 RentPayments = _context.RentPayments.Where(r => r.TenantID.Equals(tenant.TenantID)).ToList(),
                 TenantUnits = _context.TenantUnits.Where(t => t.TenantID.Equals(tenant.TenantID)).ToList()
             };
-
             return t;
         }
 
