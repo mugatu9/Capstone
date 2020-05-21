@@ -154,7 +154,7 @@ namespace CSD480Group3Capstone001.Controllers
             return _context.Tenants.Any(e => e.TenantID == id);
         }
 
-        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit", "Building", "Employer" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit", "Building", "Employer", "Delinquent Rent", "Test" };//this is where you put more option for the drop down
 
     // GET: Tenants/Search
     public IActionResult Search()
@@ -191,6 +191,32 @@ namespace CSD480Group3Capstone001.Controllers
                     case "Building":
                         //TODO: implement search query
                         break;
+                    case "Delinquent Rent":
+                        var goodTenants = from R in _context.RentPayments join
+                                          T in _context.Tenants on R.TenantID equals T.TenantID
+                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
+                                          select T;
+                        var allTenants = from T in _context.Tenants
+                                         select T;
+                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
+                        tenants = (from T in badTenants
+                                  select T).ToList();
+
+                        break;
+                    case "Test":
+                        int unitId = 5; // this will be a parameter passed to this query through a function
+                        var unitTenants = from U in _context.Units join
+                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
+                                               where U.UnitID == unitId
+                                               select T;
+                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                     
+                        tenants.Clear();
+                        tenants.Add(mostRecentTenant);
+
+                        break;
+                        //TODO: add more search cases and queries
                     case "Employer":
                         dyTenants = dyTenants.Where(t => t.Employer.ToLower().Contains(searchString)).ToList();
                         break;
@@ -241,3 +267,37 @@ namespace CSD480Group3Capstone001.Controllers
 
     }
 }
+/* user story queries
+7.
+List<Contractor> usedContractors = (from C in _context.Contractors join
+                                               R in _context.RepairHistories on C.ContractorID equals R.ContractorID
+                                               select C).ToList();
+8.
+var openWorkOrders = (from B in _context.Buildings join 
+                                              U in _context.Units on B.BuildingID equals U.BuildingID join
+                                              R in _context.RepairHistories on U.UnitID equals R.UnitID join
+                                              C in _context.Contractors on R.ContractorID equals C.ContractorID
+                                              where R.FinishDate == null
+                                              select new{
+                                                 address = B.Address,
+                                                 contractor = C.Company,
+                                                 unit = U.UnitNumber,
+                                                 startDate = R.StartDate,
+                                                 notes = R.Notes,
+                                                 cost = R.Cost,
+                                                 paid = R.Paid
+                                              }
+                                              ).ToList();
+9.
+
+    int unitId = 5; // this will be a parameter passed to this query through a function
+                        var unitTenants = from U in _context.Units join
+                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
+                                               where U.UnitID == unitId
+                                               select T;
+                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                     
+                        tenants.Clear();
+                        tenants.Add(mostRecentTenant);
+*/

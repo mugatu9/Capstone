@@ -13,7 +13,7 @@ namespace CSD480Group3Capstone001.Models
         public int TenantID { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public Tenant tenant { get; set; }
