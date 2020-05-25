@@ -295,6 +295,16 @@ var tenantInfo = (from B in _context.Buildings join
                                             tenant = T.FirstName + " " + T.LastName,
                                             plate = V.LicensePlate
                                          }).ToList();
+6.
+var goodTenants = from R in _context.RentPayments join
+                                          T in _context.Tenants on R.TenantID equals T.TenantID
+                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
+                                          select T;
+                        var allTenants = from T in _context.Tenants
+                                         select T;
+                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
+                        dyTenants = (from T in badTenants
+                                  select T).ToList();
 
 7.
 List<Contractor> usedContractors = (from C in _context.Contractors join
