@@ -182,7 +182,22 @@ namespace CSD480Group3Capstone001.Controllers
                         dyTenants = dyTenants.Where(t => t.FirstName.ToLower().Contains(searchString) || t.LastName.ToLower().Contains(searchString) || (t.FirstName.ToLower() + " " + t.LastName.ToLower()).Contains(searchString)).ToList();
                         break;
                     case "License Plate":
-                        List<int> tenantIds = (_context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString))).Select(v => v.TenantID).ToList();
+                        var tenantInfo = (from B in _context.Buildings join
+                                         U in _context.Units on B.BuildingID equals U.BuildingID join
+                                         TU in _context.TenantUnits on U.UnitID equals TU.UnitID join
+                                         T in _context.Tenants on TU.TenantID equals T.TenantID join
+                                         V in _context.Vehicles on T.TenantID equals V.TenantID
+                                         where V.LicensePlate.Contains(searchString)
+                                         select new { 
+                                            building = B.Address,
+                                            unit = U.UnitNumber,
+                                            tenant = T.FirstName + " " + T.LastName,
+                                            plate = V.LicensePlate
+                                         }).ToList();
+
+
+
+List<int> tenantIds = (_context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString))).Select(v => v.TenantID).ToList();
                         dyTenants = dyTenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
                     case "Unit":
@@ -267,6 +282,20 @@ namespace CSD480Group3Capstone001.Controllers
     }
 }
 /* user story queries
+1.
+var tenantInfo = (from B in _context.Buildings join
+                                         U in _context.Units on B.BuildingID equals U.BuildingID join
+                                         TU in _context.TenantUnits on U.UnitID equals TU.UnitID join
+                                         T in _context.Tenants on TU.TenantID equals T.TenantID join
+                                         V in _context.Vehicles on T.TenantID equals V.TenantID
+                                         where V.LicensePlate.Contains(searchString)
+                                         select new { 
+                                            building = B.Address,
+                                            unit = U.UnitNumber,
+                                            tenant = T.FirstName + " " + T.LastName,
+                                            plate = V.LicensePlate
+                                         }).ToList();
+
 7.
 List<Contractor> usedContractors = (from C in _context.Contractors join
                                                R in _context.RepairHistories on C.ContractorID equals R.ContractorID
