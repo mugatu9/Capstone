@@ -329,3 +329,7 @@ C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\n
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\RentPayments\Details.cshtml.g.cs
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\RentPayments\Edit.cshtml.g.cs
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\RentPayments\Index.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_LayoutUser.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Search.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\_DisplayUnit.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\_UnitAccordion.cshtml.g.cs
