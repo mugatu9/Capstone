@@ -169,9 +169,9 @@ namespace CSD480Group3Capstone001.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Search(string searchString, string searchBy )
         {
-            List<Tenant> dyTenants = GetFullTenants();
+            List<Tenant> tenants = GetFullTenants();
 
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && dyTenants.Count() > 0)
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && tenants.Count() > 0)
             {
                 ViewData["searchString"] = searchString;
                 ViewData["searchBy"] = searchBy;
@@ -179,11 +179,11 @@ namespace CSD480Group3Capstone001.Controllers
                 switch (searchBy)
                 {
                     case "Name":
-                        dyTenants = dyTenants.Where(t => t.FirstName.ToLower().Contains(searchString) || t.LastName.ToLower().Contains(searchString) || (t.FirstName.ToLower() + " " + t.LastName.ToLower()).Contains(searchString)).ToList();
+                        tenants = tenants.Where(t => t.FirstName.ToLower().Contains(searchString) || t.LastName.ToLower().Contains(searchString) || (t.FirstName.ToLower() + " " + t.LastName.ToLower()).Contains(searchString)).ToList();
                         break;
                     case "License Plate":
                         List<int> tenantIds = (_context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString))).Select(v => v.TenantID).ToList();
-                        dyTenants = dyTenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
+                        tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
                     case "Unit":
                         //TODO: implement search query
@@ -218,7 +218,7 @@ namespace CSD480Group3Capstone001.Controllers
                         break;
                         //TODO: add more search cases and queries
                     case "Employer":
-                        dyTenants = dyTenants.Where(t => t.Employer.ToLower().Contains(searchString)).ToList();
+                        tenants = tenants.Where(t => t.Employer.ToLower().Contains(searchString)).ToList();
                         break;
                     //TODO: add more search cases and queries, make sure to add the case string to the searchAreas list
                     default:
@@ -227,7 +227,7 @@ namespace CSD480Group3Capstone001.Controllers
                 }
                 
             }
-            return View(dyTenants);
+            return View(tenants);
         }
 
         public List<Tenant> GetFullTenants()
