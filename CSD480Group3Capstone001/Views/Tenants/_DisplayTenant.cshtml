@@ -35,7 +35,7 @@
         </dd>
         @{
             <dt class="col-sm-2">
-                Vehicle License Plates
+               License Plates
             </dt>
             <dd class="col-sm-10">
                 @foreach (var vehicle in Model.Vehicles)
@@ -44,12 +44,12 @@
                 }
             </dd>
             <dt class="col-sm-2">
-                Units
+                Addresses
             </dt>
             <dd class="col-sm-10">
                 @foreach (var tu in Model.TenantUnits)
                 {
-                    <span>Unit# @tu.unit.UnitNumber in building @tu.unit.Building.Address </span>
+                <span>Unit @tu.unit.UnitNumber @tu.unit.Building.Address @tu.unit.Building.City @tu.unit.Building.State @tu.unit.Building.Zip </span>
                 }
             </dd>
 
