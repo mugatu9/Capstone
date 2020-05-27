@@ -12,6 +12,8 @@ using CSD480Group3Capstone001.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CSD480Group3Capstone001
 {
@@ -31,9 +33,7 @@ namespace CSD480Group3Capstone001
 
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection"))) ;
-            /*services.AddDbContext<PropertyManagementContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));*/
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

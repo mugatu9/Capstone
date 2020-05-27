@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace CSD480Group3Capstone001.Data

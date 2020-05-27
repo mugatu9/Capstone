@@ -131,9 +131,6 @@ C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\n
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.csproj.CoreCompileInputs.cache
-C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\netcoreapp3.0\Microsoft.Data.Sqlite.dll
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\netcoreapp3.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Sqlite.dll
@@ -333,3 +330,7 @@ C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\n
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\Search.cshtml.g.cs
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\_DisplayUnit.cshtml.g.cs
 C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Units\_UnitAccordion.cshtml.g.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.csprojAssemblyReference.cache
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.csproj.CoreCompileInputs.cache
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\natha\Source\Repos\mugatu9\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\CSD480Group3Capstone001.MvcApplicationPartsAssemblyInfo.cache
