@@ -242,21 +242,17 @@ namespace CSD480Group3Capstone001.Controllers
         }
         public Tenant GetFullTenant(Tenant tenant)
         {
-            Tenant t = new Tenant
+            tenant.Infractions = _context.Infractions.Where(i => i.TenantID.Equals(tenant.TenantID)).ToList();
+            tenant.Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(tenant.TenantID)).ToList();
+            tenant.RentPayments = _context.RentPayments.Where(r => r.TenantID.Equals(tenant.TenantID)).ToList();
+            tenant.TenantUnits = _context.TenantUnits.Where(t => t.TenantID.Equals(tenant.TenantID)).ToList();
+
+            foreach (var tu in tenant.TenantUnits)
             {
-                FirstName = tenant.FirstName,
-                LastName = tenant.LastName,
-                TenantID = tenant.TenantID,
-                Employer = tenant.Employer,
-                Salary = tenant.Salary,
-                MovedInDate = tenant.MovedInDate,
-                MovedOutDate = tenant.MovedOutDate,
-                Infractions = _context.Infractions.Where(i => i.TenantID.Equals(tenant.TenantID)).ToList(),
-                Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(tenant.TenantID)).ToList(),
-                RentPayments = _context.RentPayments.Where(r => r.TenantID.Equals(tenant.TenantID)).ToList(),
-                TenantUnits = _context.TenantUnits.Where(t => t.TenantID.Equals(tenant.TenantID)).ToList()
-            };
-            return t;
+                tu.unit = _context.Units.First(u => u.UnitID.Equals(tu.UnitID));
+                tu.unit.Building = _context.Buildings.First(b => b.BuildingID.Equals(tu.unit.BuildingID));
+            }
+            return tenant;
         }
 
         public static List<string> GetSearchAreas()
