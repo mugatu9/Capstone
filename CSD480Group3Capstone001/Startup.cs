@@ -31,6 +31,23 @@ namespace CSD480Group3Capstone001
 
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection"))) ;
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<MyDbContext>()
+                .AddDefaultTokenProviders();
+
+
+            //Seting the Account Login page  
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings  
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login  
+                options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout  
+                options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied  
+                options.SlidingExpiration = true;
+            });
+
             /*services.AddDbContext<PropertyManagementContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));*/
@@ -39,6 +56,27 @@ namespace CSD480Group3Capstone001
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
+
+        //private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        //{
+        //    var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        //    var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+
+        //    IdentityResult roleResult;
+        //    //Adding Addmin Role  
+        //    var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+        //    if (!roleCheck)
+        //    {
+        //        //create the roles and seed them to the database  
+        //        roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+        //    }
+        //    //Assign Admin role to the main User here we have given our newly loregistered login id for Admin management  
+        //    IdentityUser user = await UserManager.FindByEmailAsync("syedshanumcain@gmail.com");
+        //    var User = new IdentityUser();
+        //    await UserManager.AddToRoleAsync(user, "Admin");
+
+        //}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
