@@ -10,8 +10,6 @@ using CSD480Group3Capstone001.Models;
 
 namespace CSD480Group3Capstone001.Controllers
 {
-
-//Adding code here
     public class UnitsController : Controller
     {
         private readonly ApplicationDbContext _context;
