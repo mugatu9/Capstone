@@ -259,6 +259,58 @@ namespace CSD480Group3Capstone001.Controllers
             return t;
         }
 
+
+
+        //view vehicles associated with a particular tenant
+        public async Task<IActionResult> TenantsVehiclesByTenantID(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var tv = await _context.Vehicles.FindAsync(id);
+            await _context.Vehicles
+                .Include(v => v.Tenant.Vehicles)
+                .FirstOrDefaultAsync(v => v.TenantID == id);
+
+            if (tv == null) return NotFound();
+
+            return View(tv);
+        }
+
+
+        // search for tenants by car license plate
+        public async Task<IActionResult> FindTenantByPlate(int? id)
+        {
+            if (id == null) return NotFound();
+
+
+
+
+            var tv = await _context.Vehicles.FindAsync(id);
+            await _context.Vehicles
+                .Include(v => v.Tenant.Vehicles)
+                .FirstOrDefaultAsync(v => v.TenantID == id);
+
+
+
+
+
+
+            if (tv == null) return NotFound();
+
+            return View(tv);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         public static List<string> GetSearchAreas()
         {
             return new List<string>(SearchAreas);

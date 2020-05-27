@@ -152,6 +152,32 @@ namespace CSD480Group3Capstone001.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        //View total rent collected for each tenant.
+        public async Task<IActionResult> RentCollectedFromTenant(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var plate = await _context.Vehicles.FindAsync(id);
+            await _context.Vehicles
+                .Include(v => v.Tenant.Vehicles)
+                .FirstOrDefaultAsync(v => v.VehicleID == id);
+
+            if (plate == null) return NotFound();
+
+            return View(plate);
+        }
+
+
+
+
+
+
+
+
+
+
+
         private bool RentPaymentExists(int id)
         {
             return _context.RentPayments.Any(e => e.RentPaymentID == id);

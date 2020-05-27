@@ -8812,19 +8812,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\natha\\.nuget\\packages\\": {}
+    "C:\\Users\\Roma\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+      "projectUniqueName": "C:\\GitHub\\Arthur May19, 2020\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
       "projectName": "CSD480Group3Capstone001",
-      "projectPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
-      "packagesPath": "C:\\Users\\natha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\obj\\",
+      "projectPath": "C:\\GitHub\\Arthur May19, 2020\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+      "packagesPath": "C:\\Users\\Roma\\.nuget\\packages\\",
+      "outputPath": "C:\\GitHub\\Arthur May19, 2020\\CSD480Group3Capstone001\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\natha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Roma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8899,14 +8903,6 @@
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
             "version": "[3.0.3, 3.0.3]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[3.0.0, 3.0.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[3.0.0, 3.0.0]"
           }
         ],
         "frameworkReferences": {
