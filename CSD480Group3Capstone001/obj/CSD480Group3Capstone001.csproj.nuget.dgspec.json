@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj": {}
+    "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj": {
+    "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+        "projectUniqueName": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
         "projectName": "CSD480Group3Capstone001",
-        "projectPath": "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
-        "packagesPath": "C:\\Users\\sajan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sajan\\source\\repos\\Capstone\\CSD480Group3Capstone001\\obj\\",
+        "projectPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\CSD480Group3Capstone001.csproj",
+        "packagesPath": "C:\\Users\\natha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\natha\\Source\\Repos\\mugatu9\\Capstone\\CSD480Group3Capstone001\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sajan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\natha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

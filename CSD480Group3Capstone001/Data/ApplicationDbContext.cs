@@ -7,13 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CSD480Group3Capstone001.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<AppUser,AppRole, int>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<AppUser> users { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Contractor> Contractors { get; set; }
         public DbSet<Infraction> Infractions { get; set; }
@@ -35,7 +34,6 @@ namespace CSD480Group3Capstone001.Data
             modelBuilder.Entity<TenantUnit>().ToTable("TenantUnits");
             modelBuilder.Entity<Unit>().ToTable("Unit");
             modelBuilder.Entity<Vehicle>().ToTable("Vehicle");
-            modelBuilder.Entity<AppUser>().Ignore(e => e.FullName);
 
             modelBuilder.Entity<RepairHistory>()
                .HasKey(o => new { o.ContractorID, o.UnitID, o.StartDate });
