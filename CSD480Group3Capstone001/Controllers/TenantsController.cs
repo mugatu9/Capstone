@@ -156,7 +156,7 @@ namespace CSD480Group3Capstone001.Controllers
             return _context.Tenants.Any(e => e.TenantID == id);
         }
 
-        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit", "Building", "Employer", "Delinquent Rent", "Test" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit#", "Street Address","City","State","Zip Code", "Employer", "Delinquent Rent", "Test" };//this is where you put more option for the drop down
 
     // GET: Tenants/Search
     public IActionResult Search()
@@ -184,14 +184,59 @@ namespace CSD480Group3Capstone001.Controllers
                         tenants = tenants.Where(t => t.FirstName.ToLower().Contains(searchString) || t.LastName.ToLower().Contains(searchString) || (t.FirstName.ToLower() + " " + t.LastName.ToLower()).Contains(searchString)).ToList();
                         break;
                     case "License Plate":
-                        List<int> tenantIds = (_context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString))).Select(v => v.TenantID).ToList();
+                        //get all the tenanatIds that are associated with a vehicle license plate that matches the search string
+                        var tenantIds = _context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString)).Select(v => v.TenantID).ToList();
+                        //get only the tenants that have tenant ids in the ids from above
+                        //because we are selecting from the tenants variable which has been filled with full tenants we will have access to vehicles, build etc in the views.
                         tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
-                    case "Unit":
-                        //TODO: implement search query
+                    case "Unit#":
+                        //get all the units with a unit number that match the search string
+                        var unitIds = _context.Units.Where(u => u.UnitNumber.ToLower().Contains(searchString)).Select(u=>u.UnitID).ToList();
+                        //get all the tenant ids that live in those units
+                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID)).Select(tu => tu.TenantID).ToList();
+                        //get only the tenants that have tenant ids in the ids from above
+                        tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
-                    case "Building":
-                        //TODO: implement search query
+                    case "Street Address":
+                        //gets a list of building ids where the buildings address matches the search string
+                        var buildingIds = _context.Buildings.Where(b => b.Address.ToLower().Contains(searchString)).Select(b => b.BuildingID).ToList();
+                        //gets a list of unit ids for a building
+                        unitIds = _context.Units.Where(u => buildingIds.Contains(u.BuildingID)).Select(u => u.UnitID).ToList();
+                        //get a list of tenant ids who live in the units
+                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID)).Select(tu => tu.TenantID).ToList();
+                        //get only the tenants that have tenant ids in the ids from above
+                        tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
+                        break;
+                    case "City":
+                        //gets a list of building ids where the buildings city matches the search string
+                        buildingIds = _context.Buildings.Where(b => b.City.ToLower().Contains(searchString)).Select(b => b.BuildingID).ToList();
+                        //gets a list of unit ids for a building
+                        unitIds = _context.Units.Where(u => buildingIds.Contains(u.BuildingID)).Select(u => u.UnitID).ToList();
+                        //get a list of tenant ids who live in the units
+                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID)).Select(tu => tu.TenantID).ToList();
+                        //get only the tenants that have tenant ids in the ids from above
+                        tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
+                        break;
+                    case "State":
+                        //gets a list of building ids where the buildings State matches the search string
+                        buildingIds = _context.Buildings.Where(b => b.State.ToLower().Contains(searchString)).Select(b => b.BuildingID).ToList();
+                        //gets a list of unit ids for a building
+                        unitIds = _context.Units.Where(u => buildingIds.Contains(u.BuildingID)).Select(u => u.UnitID).ToList();
+                        //get a list of tenant ids who live in the units
+                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID)).Select(tu => tu.TenantID).ToList();
+                        //get only the tenants that have tenant ids in the ids from above
+                        tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
+                        break;
+                    case "Zip Code":
+                        //gets a list of building ids where the buildings zip code matches the search string
+                        buildingIds = _context.Buildings.Where(b => b.Zip.ToString().Contains(searchString)).Select(b => b.BuildingID).ToList();
+                        //gets a list of unit ids for a building
+                        unitIds = _context.Units.Where(u => buildingIds.Contains(u.BuildingID)).Select(u => u.UnitID).ToList();
+                        //get a list of tenant ids who live in the units
+                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID)).Select(tu => tu.TenantID).ToList();
+                        //get only the tenants that have tenant ids in the ids from above
+                        tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
                     case "Delinquent Rent":
                         var goodTenants = from R in _context.RentPayments join
@@ -244,21 +289,17 @@ namespace CSD480Group3Capstone001.Controllers
         }
         public Tenant GetFullTenant(Tenant tenant)
         {
-            Tenant t = new Tenant
+            tenant.Infractions = _context.Infractions.Where(i => i.TenantID.Equals(tenant.TenantID)).ToList();
+            tenant.Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(tenant.TenantID)).ToList();
+            tenant.RentPayments = _context.RentPayments.Where(r => r.TenantID.Equals(tenant.TenantID)).ToList();
+            tenant.TenantUnits = _context.TenantUnits.Where(t => t.TenantID.Equals(tenant.TenantID)).ToList();
+
+            foreach (var tu in tenant.TenantUnits)
             {
-                FirstName = tenant.FirstName,
-                LastName = tenant.LastName,
-                TenantID = tenant.TenantID,
-                Employer = tenant.Employer,
-                Salary = tenant.Salary,
-                MovedInDate = tenant.MovedInDate,
-                MovedOutDate = tenant.MovedOutDate,
-                Infractions = _context.Infractions.Where(i => i.TenantID.Equals(tenant.TenantID)).ToList(),
-                Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(tenant.TenantID)).ToList(),
-                RentPayments = _context.RentPayments.Where(r => r.TenantID.Equals(tenant.TenantID)).ToList(),
-                TenantUnits = _context.TenantUnits.Where(t => t.TenantID.Equals(tenant.TenantID)).ToList()
-            };
-            return t;
+                tu.unit = _context.Units.First(u => u.UnitID.Equals(tu.UnitID));
+                tu.unit.Building = _context.Buildings.First(b => b.BuildingID.Equals(tu.unit.BuildingID));
+            }
+            return tenant;
         }
 
         public static List<string> GetSearchAreas()
