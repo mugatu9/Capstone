@@ -11,9 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TenantsController : Controller
     {
         private readonly ApplicationDbContext _context;
