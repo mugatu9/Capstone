@@ -27,7 +27,7 @@
             @{
                 if (!string.IsNullOrEmpty(ViewData["Title"].ToString()))
                 {
-                    
+                    //TODO: update this hot mess to a for loop that  changes the class bg-secondary to bg-primary for the selected page or something
                     if (ViewData["Title"].Equals("Overview"))
                     {
                         <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Overview" asp-action="Index">Overview</a></div>
@@ -51,6 +51,14 @@
                     else
                     {
                         <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
+                    }
+                    if (ViewData["Title"].Equals("Buildings"))
+                    {
+                        <div id="Buildings" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Search">Buildings</a></div>
+                    }
+                    else
+                    {
+                        <div id="Buildings" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Search">Buildings</a></div>
                     }
                     <div id="Work Orders" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Work Orders</a></div>
                     <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Accounting</a></div>
