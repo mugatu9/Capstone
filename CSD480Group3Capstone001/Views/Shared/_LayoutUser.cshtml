@@ -25,10 +25,18 @@
         <div class="d-flex flex-wrap mb-2">
 
             @{
-                if (!string.IsNullOrEmpty(ViewData["currPage"].ToString()))
+                if (!string.IsNullOrEmpty(ViewData["Title"].ToString()))
                 {
-                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Overview</a></div>
-                    if (ViewData["currPage"].Equals("Tenants"))
+                    
+                    if (ViewData["Title"].Equals("Overview"))
+                    {
+                        <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Overview" asp-action="Index">Overview</a></div>
+                    }
+                    else
+                    {
+                        <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Overview" asp-action="Index">Overview</a></div>
+                    }
+                    if (ViewData["Title"].Equals("Tenants"))
                     {
                         <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
                     }
@@ -36,7 +44,7 @@
                     {
                         <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
                     }
-                    if (ViewData["currPage"].Equals("Units"))
+                    if (ViewData["Title"].Equals("Units"))
                     {
                         <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
                     }
