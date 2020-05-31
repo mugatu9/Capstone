@@ -60,7 +60,14 @@
                     {
                         <div id="Buildings" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Search">Buildings</a></div>
                     }
-                    <div id="Work Orders" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Work Orders</a></div>
+                    if (ViewData["Title"].Equals("ContractorsPage"))
+                    {
+                        <div id="ContractorsPage" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="ContractorsPage" asp-action="Index">Contractors</a></div>
+                    }
+                    else
+                    {
+                        <div id="ContractorsPage" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="ContractorsPage" asp-action="Index">Contractors</a></div>
+                    }
                     if (ViewData["Title"].Equals("Accounting"))
                     {
                         <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Accounting" asp-action="Index">Accounting</a></div>
