@@ -171,10 +171,17 @@ namespace CSD480Group3Capstone001.Controllers
         {
             List<Tenant> tenants = _context.Tenants.ToList();
 
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && tenants.Count() > 0)
+            if (!String.IsNullOrEmpty(searchString))
             {
                 ViewData["searchString"] = searchString;
+            }
+            if (!String.IsNullOrEmpty(searchBy))
+            {
                 ViewData["searchBy"] = searchBy;
+            }    
+
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && tenants.Count() > 0)
+            {
                 searchString = searchString.ToLower();
                 switch (searchBy)
                 {
@@ -272,6 +279,8 @@ namespace CSD480Group3Capstone001.Controllers
                 }
                 
             }
+
+
             return View(GetFullTenants(tenants));
         }
 

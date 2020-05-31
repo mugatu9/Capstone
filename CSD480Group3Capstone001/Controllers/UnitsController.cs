@@ -175,10 +175,20 @@ namespace CSD480Group3Capstone001.Controllers
         {
             List<Unit> units = _context.Units.ToList();
 
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && units.Count() > 0)
+
+            if (!String.IsNullOrEmpty(searchString))
             {
                 ViewData["searchString"] = searchString;
+            }
+            if (!String.IsNullOrEmpty(searchBy))
+            {
                 ViewData["searchBy"] = searchBy;
+            }
+
+
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && units.Count() > 0)
+            {
+
                 searchString = searchString.ToLower();
                 switch (searchBy)
                 {

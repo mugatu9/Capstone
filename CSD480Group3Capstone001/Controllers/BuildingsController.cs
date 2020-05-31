@@ -168,10 +168,19 @@ namespace CSD480Group3Capstone001.Controllers
         {
             List<Building> buildings = _context.Buildings.ToList();
 
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && buildings.Count() > 0)
+            if (!String.IsNullOrEmpty(searchString))
             {
                 ViewData["searchString"] = searchString;
+            }
+            if (!String.IsNullOrEmpty(searchBy))
+            {
                 ViewData["searchBy"] = searchBy;
+            }
+
+
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && buildings.Count() > 0)
+            {
+
                 searchString = searchString.ToLower();
                 switch (searchBy)
                 {

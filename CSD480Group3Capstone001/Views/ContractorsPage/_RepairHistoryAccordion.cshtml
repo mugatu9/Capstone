@@ -15,12 +15,12 @@
                 <div class="card-header row border border-dark rounded p-0 mt-2" id="@GetAccordionId("rheader",index)">
                     <div class="col-12 d-flex">
                         <div class="p-2 text-center">
-                            <span class="font-weight-bold p-2">Contractor Id</span>
-                            <br />#@repair.ContractorID
+                            <span class="font-weight-bold p-2">Contractor Company</span>
+                            <br />@repair.Contractor.Company
                         </div>
                         <div class="p-2 text-center">
-                            <span class="font-weight-bold">Unit Id</span>
-                            <br />@repair.UnitID
+                            <span class="font-weight-bold">Unit #</span>
+                            <br />@repair.Unit.UnitNumber
                         </div>
                         <div class="p-2 ml-auto align-self-center">
                             <button id="@GetAccordionId("rexpand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("rbody",index),@GetAccordionId("rexpand",index),@GetAccordionId("rhide",index)" aria-controls="@GetAccordionId("rbody",index)">Expand</button>

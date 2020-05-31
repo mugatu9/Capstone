@@ -46,10 +46,18 @@ namespace CSD480Group3Capstone001.Controllers
         {
             List<Contractor> contractors = _context.Contractors.ToList();
 
-            if (!String.IsNullOrEmpty(contractSearchString) && !String.IsNullOrEmpty(contractSearchBy) && contractors.Count() > 0)
+
+            if (!String.IsNullOrEmpty(contractSearchString))
             {
                 ViewData["contractSearchString"] = contractSearchString;
-                ViewData["searchBy"] = contractSearchBy;
+            }
+            if (!String.IsNullOrEmpty(contractSearchBy))
+            {
+                ViewData["contractSearchBy"] = contractSearchBy;
+            }
+
+            if (!String.IsNullOrEmpty(contractSearchString) && !String.IsNullOrEmpty(contractSearchBy) && contractors.Count() > 0)
+            {
                 contractSearchString = contractSearchString.ToLower();
                 switch (contractSearchBy)
                 {
@@ -64,11 +72,18 @@ namespace CSD480Group3Capstone001.Controllers
 
             }
             List<RepairHistory> repairs = _context.RepairHistories.ToList();
-           
-            if (!String.IsNullOrEmpty(repairSearchString) && !String.IsNullOrEmpty(repairSearchBy) && contractors.Count() > 0)
+
+            if (!String.IsNullOrEmpty(repairSearchString))
             {
                 ViewData["repairSearchString"] = repairSearchString;
-                ViewData["repairSearchBy"] = contractSearchBy;
+            }
+            if (!String.IsNullOrEmpty(repairSearchBy))
+            {
+                ViewData["repairSearchBy"] = repairSearchBy;
+            }
+
+            if (!String.IsNullOrEmpty(repairSearchString) && !String.IsNullOrEmpty(repairSearchBy) && contractors.Count() > 0)
+            {
                 repairSearchString = repairSearchString.ToLower();
                 switch (repairSearchBy)
                 {

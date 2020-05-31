@@ -5,41 +5,41 @@
         <h4>RepairHistory</h4>
         <hr />
         <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FinishDate)
+            <dt class="col-sm-4">
+                Start Date
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FinishDate)
+            <dd class="col-sm-6">
+                @Model.StartDate
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Notes)
+            <dt class="col-sm-4">
+                Finsh Date
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Notes)
+            <dd class="col-sm-6">
+                @Model.FinishDate
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cost)
+            <dt class="col-sm-4">
+                Cost
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cost)
+            <dd class="col-sm-6">
+                @Model.Cost
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 Paid
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Model.Paid
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Unit)
+            <dt class="col-sm-4">
+                Unit
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Unit.UnitID)
+            <dd class="col-sm-6">
+                @Model.Unit.UnitNumber
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Contractor)
+            <dt class="col-sm-4">
+                Contracting company
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Contractor.ContractorID)
+            <dd class="col-sm-6">
+                @Model.Contractor.Company
             </dd>
         </dl>
     </div>
