@@ -159,7 +159,7 @@ namespace CSD480Group3Capstone001.Controllers
     // GET: Tenants/Search
     public IActionResult Search()
         {
-            return View(GetFullTenants());
+            return View(GetFullTenants(_context.Tenants.ToList()));
         }
 
         // POST: Tenants/Search
@@ -169,7 +169,7 @@ namespace CSD480Group3Capstone001.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Search(string searchString, string searchBy )
         {
-            List<Tenant> tenants = GetFullTenants();
+            List<Tenant> tenants = _context.Tenants.ToList();
 
             if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && tenants.Count() > 0)
             {
@@ -272,13 +272,13 @@ namespace CSD480Group3Capstone001.Controllers
                 }
                 
             }
-            return View(tenants);
+            return View(GetFullTenants(tenants));
         }
 
-        public List<Tenant> GetFullTenants()
+        public List<Tenant> GetFullTenants(List<Tenant> tenants)
         {
             List<Tenant> tempTenants = new List<Tenant>();
-            foreach (Tenant t in _context.Tenants)
+            foreach (Tenant t in tenants)
             {
                 tempTenants.Add(GetFullTenant(t));
             }
