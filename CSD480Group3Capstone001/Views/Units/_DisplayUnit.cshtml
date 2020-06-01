@@ -1,0 +1,53 @@
+﻿@model CSD480Group3Capstone001.Models.Unit
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UnitNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UnitNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SqrFootage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SqrFootage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Building)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Building.BuildingID)
+        </dd>
+
+
+        @{
+            <dt class="col-sm-2">
+                Tenants
+            </dt>
+            <dd class="col-sm-10">
+                @foreach (TenantUnit tu in Model.TenantUnits)
+                {
+
+                    <span>@tu.tenant.FirstName @tu.tenant.LastName</span>
+
+                }
+            </dd>
+            <dt class="col-sm-2">
+                Vehicles
+            </dt>
+            <dd class="col-sm-10">
+                @foreach (TenantUnit tu in Model.TenantUnits)
+                {
+                    foreach (Vehicle v in tu.tenant.Vehicles)
+                    {
+                        <span>@v.Make @v.Model plate number:@v.LicensePlate</span>
+                    }
+                }
+            </dd>
+        }
+
+    </dl>
+</div>
+

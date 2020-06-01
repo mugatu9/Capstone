@@ -1,0 +1,48 @@
+﻿@model CSD480Group3Capstone001.Models.RepairHistory
+
+
+    <div>
+        <h4>RepairHistory</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                Start Date
+            </dt>
+            <dd class="col-sm-6">
+                @Model.StartDate
+            </dd>
+            <dt class="col-sm-4">
+                Finsh Date
+            </dt>
+            <dd class="col-sm-6">
+                @Model.FinishDate
+            </dd>
+            <dt class="col-sm-4">
+                Cost
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Cost
+            </dd>
+            <dt class="col-sm-4">
+                Paid
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Paid
+            </dd>
+            <dt class="col-sm-4">
+                Unit
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Unit.UnitNumber
+            </dd>
+            <dt class="col-sm-4">
+                Contracting company
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Contractor.Company
+            </dd>
+        </dl>
+    </div>
+
+
+
