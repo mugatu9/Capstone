@@ -163,7 +163,7 @@ namespace CSD480Group3Capstone001.Controllers
         // GET: Tenants/Search
         public IActionResult Search()
         {
-            return View(GetFullUnits());
+            return View(GetFullUnits(_context.Units.ToList()));
         }
 
         // POST: Tenants/Search
@@ -173,12 +173,22 @@ namespace CSD480Group3Capstone001.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Search(string searchString, string searchBy)
         {
-            List<Unit> units = GetFullUnits();
+            List<Unit> units = _context.Units.ToList();
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ViewData["searchString"] = searchString;
+            }
+            if (!String.IsNullOrEmpty(searchBy))
+            {
+                ViewData["searchBy"] = searchBy;
+            }
+
 
             if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && units.Count() > 0)
             {
-                ViewData["searchString"] = searchString;
-                ViewData["searchBy"] = searchBy;
+
                 searchString = searchString.ToLower();
                 switch (searchBy)
                 {
@@ -213,13 +223,13 @@ namespace CSD480Group3Capstone001.Controllers
                 }
 
             }
-            return View(units);
+            return View(GetFullUnits(units));
         }
 
-        public List<Unit> GetFullUnits()
+        public List<Unit> GetFullUnits(List<Unit> units)
         {
             List<Unit> tempUnits = new List<Unit>();
-            foreach (Unit u in _context.Units)
+            foreach (Unit u in units)
             {
                 tempUnits.Add(GetFullUnit(u));
             }

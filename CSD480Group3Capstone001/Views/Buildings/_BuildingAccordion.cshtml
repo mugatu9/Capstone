@@ -1,0 +1,101 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Text
+@using CSD480Group3Capstone001.Controllers
+
+@model IEnumerable<CSD480Group3Capstone001.Models.Building>
+
+
+<div class="row accordion mt-2" id="tenantAccordion">
+        @{
+            int index = 0;
+        }
+        @foreach (var building in Model)
+        {
+            <div class="col-11 ml-auto mr-auto">
+                <div class="card-header row border border-dark rounded p-0 mt-2" id="@GetAccordionId("header",index)">
+                    <div class="col-12 d-flex">
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold p-2">Building Id</span>
+                            <br />#@building.BuildingID
+                        </div>
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold">Building Address</span>
+                            <br />#@building.Address
+                        </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Number of Tenants</span>
+                            <br />@getTenantsCount(building)
+                        </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Square Footage</span>
+                            <br />@getSquareFootage(building)
+                        </div>
+                        <div class="p-2 ml-auto align-self-center">
+                            <button id="@GetAccordionId("expand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="@GetAccordionId("body",index)" class="collapse" aria-labelledby="@GetAccordionId("header",index)" data-parent="#tenantAccordion">
+                    <div class="card-body">
+                        @await Html.PartialAsync("~/Views/Buildings/_DisplayBuilding.cshtml", building, new ViewDataDictionary(ViewData))
+                    </div>
+                </div>
+            </div>
+            index++;
+        }
+    </div>
+
+
+
+
+
+@functions{
+    private string GetAccordionId(string str,int num)
+    {
+        return str + num.ToString();
+    }
+
+    private void DisplaySearchedCat()
+    {
+        List<string> searchAreas = (List<string>)ViewData["searchAreas"];
+        string searchBy = (string)ViewData["searchBy"];
+
+        if (!string.IsNullOrEmpty(searchBy))
+        {
+            if (!searchBy.Equals(searchAreas[0]))//Do nothing Name is always displayed
+            {
+
+
+            }else if (searchBy.Equals(searchAreas[1]))//License Plate
+            {
+
+            }
+        }
+    }
+
+    private int getTenantsCount(Building b)
+    {
+        int count = 0;
+        foreach (var unit in b.Units)
+        {
+            foreach (var tu in unit.TenantUnits)
+            {
+                if (!tu.tenant.MovedOutDate.Equals(null))
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private int getSquareFootage(Building b)
+    {
+        int squareFootage = 0;
+        foreach (var unit in b.Units)
+        {
+            squareFootage += unit.SqrFootage;
+        }
+        return squareFootage;
+    }
+}

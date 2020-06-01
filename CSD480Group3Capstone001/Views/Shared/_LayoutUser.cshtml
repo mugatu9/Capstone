@@ -25,35 +25,54 @@
         <div class="d-flex flex-wrap mb-2">
 
             @{
-                if (!string.IsNullOrEmpty(ViewData["currPage"].ToString()))
+                //TODO: update this hot mess to a for loop that  changes the class bg-secondary to bg-primary for the selected page or something
+                if (ViewData["Title"].Equals("Overview"))
                 {
-                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Overview</a></div>
-                    if (ViewData["currPage"].Equals("Tenants"))
-                    {
-                        <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
-                    }
-                    else
-                    {
-                        <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
-                    }
-                    if (ViewData["currPage"].Equals("Units"))
-                    {
-                        <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
-                    }
-                    else
-                    {
-                        <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
-                    }
-                    <div id="Work Orders" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Work Orders</a></div>
-                    <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Accounting</a></div>
+                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Overview" asp-action="Index">Overview</a></div>
                 }
                 else
                 {
-                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Overview</a></div>
+                    <div id="Overview" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Overview" asp-action="Index">Overview</a></div>
+                }
+                if (ViewData["Title"].Equals("Tenants"))
+                {
+                    <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
+                }
+                else
+                {
                     <div id="Tenants" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Tenants" asp-action="Search">Tenants</a></div>
+                }
+                if (ViewData["Title"].Equals("Units"))
+                {
+                    <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
+                }
+                else
+                {
                     <div id="Units" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Units" asp-action="Search">Units</a></div>
-                    <div id="Work Orders" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Work Orders</a></div>
-                    <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="" asp-action="">Accounting</a></div>
+                }
+                if (ViewData["Title"].Equals("Buildings"))
+                {
+                    <div id="Buildings" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Search">Buildings</a></div>
+                }
+                else
+                {
+                    <div id="Buildings" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Search">Buildings</a></div>
+                }
+                if (ViewData["Title"].Equals("ContractorsPage"))
+                {
+                    <div id="ContractorsPage" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="ContractorsPage" asp-action="Index">Contractors</a></div>
+                }
+                else
+                {
+                    <div id="ContractorsPage" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="ContractorsPage" asp-action="Index">Contractors</a></div>
+                }
+                if (ViewData["Title"].Equals("Accounting"))
+                {
+                    <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Accounting" asp-action="Index">Accounting</a></div>
+                }
+                else
+                {
+                    <div id="Accounting" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Accounting" asp-action="Index">Accounting</a></div>
                 }
             }
         </div>
