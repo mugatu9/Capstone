@@ -317,6 +317,30 @@ namespace CSD480Group3Capstone001.Controllers
     }
 }
 /* user story queries
+1.
+var tenantInfo = (from B in _context.Buildings join
+                                         U in _context.Units on B.BuildingID equals U.BuildingID join
+                                         TU in _context.TenantUnits on U.UnitID equals TU.UnitID join
+                                         T in _context.Tenants on TU.TenantID equals T.TenantID join
+                                         V in _context.Vehicles on T.TenantID equals V.TenantID
+                                         where V.LicensePlate.Contains(searchString)
+                                         select new { 
+                                            building = B.Address,
+                                            unit = U.UnitNumber,
+                                            tenant = T.FirstName + " " + T.LastName,
+                                            plate = V.LicensePlate
+                                         }).ToList();
+6.
+var goodTenants = from R in _context.RentPayments join
+                                          T in _context.Tenants on R.TenantID equals T.TenantID
+                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
+                                          select T;
+                        var allTenants = from T in _context.Tenants
+                                         select T;
+                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
+                        dyTenants = (from T in badTenants
+                                  select T).ToList();
+
 7.
 List<Contractor> usedContractors = (from C in _context.Contractors join
                                                R in _context.RepairHistories on C.ContractorID equals R.ContractorID
