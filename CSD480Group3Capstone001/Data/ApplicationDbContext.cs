@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CSD480Group3Capstone001.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,6 +25,7 @@ namespace CSD480Group3Capstone001.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Building>().ToTable("Building");
             modelBuilder.Entity<Contractor>().ToTable("Contractor");
             modelBuilder.Entity<Infraction>().ToTable("Infraction");
