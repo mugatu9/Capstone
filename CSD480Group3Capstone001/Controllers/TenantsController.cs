@@ -11,11 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class TenantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -161,7 +159,7 @@ namespace CSD480Group3Capstone001.Controllers
     // GET: Tenants/Search
     public IActionResult Search()
         {
-            return View(GetFullTenants());
+            return View(GetFullTenants(_context.Tenants.ToList()));
         }
 
         // POST: Tenants/Search
@@ -171,12 +169,19 @@ namespace CSD480Group3Capstone001.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Search(string searchString, string searchBy )
         {
-            List<Tenant> tenants = GetFullTenants();
+            List<Tenant> tenants = _context.Tenants.ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ViewData["searchString"] = searchString;
+            }
+            if (!String.IsNullOrEmpty(searchBy))
+            {
+                ViewData["searchBy"] = searchBy;
+            }    
 
             if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchBy) && tenants.Count() > 0)
             {
-                ViewData["searchString"] = searchString;
-                ViewData["searchBy"] = searchBy;
                 searchString = searchString.ToLower();
                 switch (searchBy)
                 {
@@ -274,13 +279,15 @@ namespace CSD480Group3Capstone001.Controllers
                 }
                 
             }
-            return View(tenants);
+
+
+            return View(GetFullTenants(tenants));
         }
 
-        public List<Tenant> GetFullTenants()
+        public List<Tenant> GetFullTenants(List<Tenant> tenants)
         {
             List<Tenant> tempTenants = new List<Tenant>();
-            foreach (Tenant t in _context.Tenants)
+            foreach (Tenant t in tenants)
             {
                 tempTenants.Add(GetFullTenant(t));
             }
@@ -310,6 +317,30 @@ namespace CSD480Group3Capstone001.Controllers
     }
 }
 /* user story queries
+1.
+var tenantInfo = (from B in _context.Buildings join
+                                         U in _context.Units on B.BuildingID equals U.BuildingID join
+                                         TU in _context.TenantUnits on U.UnitID equals TU.UnitID join
+                                         T in _context.Tenants on TU.TenantID equals T.TenantID join
+                                         V in _context.Vehicles on T.TenantID equals V.TenantID
+                                         where V.LicensePlate.Contains(searchString)
+                                         select new { 
+                                            building = B.Address,
+                                            unit = U.UnitNumber,
+                                            tenant = T.FirstName + " " + T.LastName,
+                                            plate = V.LicensePlate
+                                         }).ToList();
+6.
+var goodTenants = from R in _context.RentPayments join
+                                          T in _context.Tenants on R.TenantID equals T.TenantID
+                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
+                                          select T;
+                        var allTenants = from T in _context.Tenants
+                                         select T;
+                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
+                        dyTenants = (from T in badTenants
+                                  select T).ToList();
+
 7.
 List<Contractor> usedContractors = (from C in _context.Contractors join
                                                R in _context.RepairHistories on C.ContractorID equals R.ContractorID

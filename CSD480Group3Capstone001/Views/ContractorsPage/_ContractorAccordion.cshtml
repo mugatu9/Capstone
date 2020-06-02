@@ -1,0 +1,67 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Text
+@using CSD480Group3Capstone001.Controllers
+
+@model IEnumerable<CSD480Group3Capstone001.Models.Contractor>
+
+
+<div class="row accordion mt-2" id="contractorAccordion">
+        @{
+            int index = 0;
+        }
+        @foreach (var contractor in Model)
+        {
+            <div class="col-11 ml-auto mr-auto">
+                <div class="card-header row border border-dark rounded p-0 mt-2" id="@GetAccordionId("cheader",index)">
+                    <div class="col-12 d-flex">
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold p-2">Id</span>
+                            <br />#@contractor.ContractorID
+                        </div>
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold">Company Name</span>
+                            <br />@contractor.Company
+                        </div>
+                        <div class="p-2 ml-auto align-self-center">
+                            <button id="@GetAccordionId("cexpand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("cbody",index),@GetAccordionId("cexpand",index),@GetAccordionId("chide",index)" aria-controls="@GetAccordionId("cbody",index)">Expand</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="@GetAccordionId("cbody",index)" class="collapse" aria-labelledby="@GetAccordionId("cheader",index)" data-parent="#contractorAccordion">
+                    <div class="card-body">
+                        @await Html.PartialAsync("~/Views/ContractorsPage/_DisplayContractor.cshtml", contractor,new ViewDataDictionary(ViewData))
+                    </div>
+                </div>
+            </div>
+            index++;
+        }
+    </div>
+
+
+
+
+
+@functions{
+    private string GetAccordionId(string str,int num)
+    {
+        return str + num.ToString();
+    }
+
+    private void DisplaySearchedCat()
+    {
+        List<string> searchAreas = (List<string>)ViewData["searchAreas"];
+        string searchBy = (string)ViewData["searchBy"];
+
+        if (!string.IsNullOrEmpty(searchBy))
+        {
+            if (!searchBy.Equals(searchAreas[0]))//Do nothing Name is always displayed
+            {
+                
+
+            }else if (searchBy.Equals(searchAreas[1]))//License Plate
+            {
+
+            }
+        }
+    }
+}

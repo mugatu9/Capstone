@@ -1,9 +1,10 @@
 ﻿@using CSD480Group3Capstone001.Controllers
 
-@model IEnumerable<CSD480Group3Capstone001.Models.Unit>
+@model IEnumerable<CSD480Group3Capstone001.Models.Building>
 
 @{
-    ViewData["Title"] = "Units";
+
+    ViewData["Title"] = "Buildings";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 
     /*
@@ -16,7 +17,7 @@
 
 
 <div class="border border-dark rounded p-2 pt-3">
-    <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Units" asp-action="Search">
+    <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Buildings" asp-action="Search">
         <div class="col-12 d-flex p-0 flex-wrap">
             <button type="submit" class="btn-sm border border-dark btn-primary ml-1 mr-1 mb-1">Search</button>
             @{
@@ -59,7 +60,7 @@
     @{
         if (Model.Any())
         {
-            @await Html.PartialAsync("~/Views/Units/_UnitAccordion.cshtml", Model, new ViewDataDictionary(ViewData));
+            @await Html.PartialAsync("~/Views/Buildings/_BuildingAccordion.cshtml", Model, new ViewDataDictionary(ViewData));
         }
         else
         {
