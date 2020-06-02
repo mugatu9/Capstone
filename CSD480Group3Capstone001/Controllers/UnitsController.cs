@@ -226,6 +226,17 @@ namespace CSD480Group3Capstone001.Controllers
             return View(GetFullUnits(units));
         }
 
+        public Tenant getMostRecentTenant(String add, String unitNum) {
+            var unitTenants = from B in _context.Buildings join
+                      U in _context.Units on B.BuildingID equals U.BuildingID join
+                      Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
+                      T in _context.Tenants on Tu.TenantID equals T.TenantID                     
+                      where  B.Address == add && U.UnitNumber == unitNum
+                      select T;
+            Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+            return mostRecentTenant;
+            
+        }
         public List<Unit> GetFullUnits(List<Unit> units)
         {
             List<Unit> tempUnits = new List<Unit>();
