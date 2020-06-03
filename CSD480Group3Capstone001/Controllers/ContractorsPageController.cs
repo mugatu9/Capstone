@@ -33,7 +33,7 @@ namespace CSD480Group3Capstone001.Controllers
 
 
 
-        private static readonly List<string> SearchContractorAreas = new List<string>() { "Specialty" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchContractorAreas = new List<string>() { "Specialty", "Previously Used" };//this is where you put more option for the drop down
 
         private static readonly List<string> SearchWorkOrderAreas = new List<string>() { "Company" };//this is where you put more option for the drop down
   
@@ -64,6 +64,11 @@ namespace CSD480Group3Capstone001.Controllers
                     case "Specialty":
                         //get contractors whos Specialty match the search query
                         contractors = contractors.Where(c => c.Specialty.ToLower().Contains(contractSearchString)).ToList();
+                        break;
+                    case "Previously Used":
+                        contractors = (from C in _context.Contractors join
+                                       R in _context.RepairHistories on C.ContractorID equals R.ContractorID
+                                       select C).Distinct().ToList();
                         break;
                     default:
                         // code block
