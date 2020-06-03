@@ -10,7 +10,7 @@
             int index = 0;
         }
         @foreach (var unit in Model)
-        {
+        {   
             <div class="col-11 ml-auto mr-auto">
                 <div class="card-header row border border-dark rounded p-0 mt-2" id="@GetAccordionId("header",index)">
                     <div class="col-12 d-flex">
@@ -26,6 +26,13 @@
                             <span class="font-weight-bold">Number of Tenants</span>
                             <br />@unit.TenantUnits.Count()
                         </div>
+
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Most Recent Tenant</span>
+                            <br />@((from TU in unit.TenantUnits orderby TU.tenant.MovedInDate descending select TU.tenant.FirstName + " " + TU.tenant.LastName).First())
+                        </div>
+
+
                         <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Square Footage</span>
                             <br />@unit.SqrFootage
@@ -50,6 +57,9 @@
 
 
 @functions{
+
+
+
     private string GetAccordionId(string str,int num)
     {
         return str + num.ToString();

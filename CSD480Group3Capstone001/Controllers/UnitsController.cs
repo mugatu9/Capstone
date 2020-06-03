@@ -227,13 +227,15 @@ namespace CSD480Group3Capstone001.Controllers
         }
 
         public Tenant getMostRecentTenant(String add, String unitNum) {
-            var unitTenants = from B in _context.Buildings join
+            Tenant mostRecentTenant = (from B in _context.Buildings join
                       U in _context.Units on B.BuildingID equals U.BuildingID join
                       Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
                       T in _context.Tenants on Tu.TenantID equals T.TenantID                     
                       where  B.Address == add && U.UnitNumber == unitNum
-                      select T;
-            Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+                      orderby T.MovedInDate descending 
+                     select T).First();
+            //Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
+            
             return mostRecentTenant;
             
         }
@@ -252,6 +254,7 @@ namespace CSD480Group3Capstone001.Controllers
             unit.Building = _context.Buildings.First(b => b.BuildingID.Equals(unit.BuildingID));
             unit.RepairHistories = _context.RepairHistories.Where(r => r.UnitID.Equals(unit.UnitID)).ToList();
             unit.TenantUnits = _context.TenantUnits.Where(t => t.UnitID.Equals(unit.UnitID)).ToList();
+            
             foreach(TenantUnit tu in unit.TenantUnits)
             {
                 tu.tenant = _context.Tenants.First(t => t.TenantID == tu.TenantID);
