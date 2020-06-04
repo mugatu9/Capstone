@@ -27,6 +27,13 @@ using CSD480Group3Capstone001.Models;
 #line hidden
 #nullable disable
 #nullable restore
+#line 3 "C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\Views\Units\_UnitAccordion.cshtml"
 using System.Runtime.CompilerServices;
 
@@ -48,7 +55,7 @@ using CSD480Group3Capstone001.Controllers;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e0b4748cd04462448dc92ce6c47dfbe29da6bb04", @"/Views/Units/_UnitAccordion.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"aaa63d68d288c22042961e0f88ec427923ad4374", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b84f6cdf9f28b937e6ee447ec9f2a02f1e99e744", @"/Views/_ViewImports.cshtml")]
     public class Views_Units__UnitAccordion : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<CSD480Group3Capstone001.Models.Unit>>
     {
         #pragma warning disable 1998
