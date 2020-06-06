@@ -42,21 +42,28 @@ namespace CSD480Group3Capstone001.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(string contractSearchString, string contractSearchBy, string repairSearchString, string repairSearchBy)
+        public IActionResult Index(string contractSearchString, string contractSearchBy, string previousContractorsOnly, string repairSearchString, string repairSearchBy)
         {
             List<Contractor> contractors = _context.Contractors.ToList();
 
+            if (previousContractorsOnly != null)
+            {
+                var contractorIds = _context.RepairHistories.Select(rh => rh.ContractorID);
+                contractors = contractors.Where(c => contractorIds.Contains(c.ContractorID)).ToList();
+                ViewData["previousContractorsOnly"] = true;
+            }
 
             if (!String.IsNullOrEmpty(contractSearchString))
             {
                 ViewData["contractSearchString"] = contractSearchString;
             }
+
             if (!String.IsNullOrEmpty(contractSearchBy))
             {
                 ViewData["contractSearchBy"] = contractSearchBy;
             }
 
-            if (!String.IsNullOrEmpty(contractSearchString) && !String.IsNullOrEmpty(contractSearchBy) && contractors.Count() > 0)
+            if (!String.IsNullOrEmpty(contractSearchString) && !String.IsNullOrEmpty(contractSearchBy) && contractors.Any())
             {
                 contractSearchString = contractSearchString.ToLower();
                 switch (contractSearchBy)

@@ -25,7 +25,7 @@
                     }
 
                     <div class="flex-grow-1 ml-1 mr-1 mb-1">
-                        <select class="custom-select border-dark" name="contractSearchBy" id="searchForSelect">
+                        <select class="custom-select border-dark" name="contractSearchBy">
                             @{
 
                                 List<string> contractSearchAreas = ContractorsPageController.GetContractorSearchAreas();
@@ -47,20 +47,35 @@
                             }
                         </select>
                     </div>
-                </div>
+                    <div class="form-check ml-2">
+                        @{
+                            if (ViewData["previousContractorsOnly"] != null && (bool)ViewData["previousContractorsOnly"])
+                            {
+                                <input class="form-check-input" type="checkbox" value="Checked" checked name="previousContractorsOnly" id="previousContractorsCheck">
+                            }
+                            else
+                            {
+                                <input class="form-check-input" type="checkbox" value="Checked" name="previousContractorsOnly" id="previousContractorsCheck">
+                            }
+                        }
+                        <label class="form-check-label" for="previousContractorsCheck">
+                            display previously used contractors only
+                        </label>
+                    </div>
+                    </div>
 
-                <hr class="border-dark" />
-                @{
-                    if (Model.Contractors.Any())
-                    {
-                        @await Html.PartialAsync("~/Views/ContractorsPage/_ContractorAccordion.cshtml", Model.Contractors, new ViewDataDictionary(ViewData));
+                    <hr class="border-dark" />
+                    @{
+                        if (Model.Contractors.Any())
+                        {
+                            @await Html.PartialAsync("~/Views/ContractorsPage/_ContractorAccordion.cshtml", Model.Contractors, new ViewDataDictionary(ViewData));
+                        }
+                        else
+                        {
+                            <p>No Contractors match the search parameters</p>
+                        }
                     }
-                    else
-                    {
-                        <p>No Contractors match the search parameters</p>
-                    }
-                }
-            </div>
+                </div>
         </div>
         <div class="col-lg-6 border-dark mt-5">
             <h2 class="text-dark">Work Order Look Up</h2>
@@ -80,7 +95,7 @@
                     }
 
                     <div class="flex-grow-1 ml-1 mr-1 mb-1">
-                        <select class="custom-select border-dark" name="repairSearchBy" id="searchForSelect">
+                        <select class="custom-select border-dark" name="repairSearchBy">
                             @{
 
                                 List<string> repairSearchAreas = ContractorsPageController.GetRepairSearchAreas();

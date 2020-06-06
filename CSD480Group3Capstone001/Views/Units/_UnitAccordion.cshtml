@@ -1,4 +1,5 @@
 ﻿@using System.Runtime.CompilerServices
+@using System.Runtime.ExceptionServices
 @using System.Text
 @using CSD480Group3Capstone001.Controllers
 
@@ -30,8 +31,23 @@
                             <span class="font-weight-bold">Square Footage</span>
                             <br />@unit.SqrFootage
                         </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Most Recent Tenant</span>
+                            <br />
+                            @{
+                                if(unit.TenantUnits.Any())
+                                {
+                                    <span>@((from t in unit.TenantUnits orderby t.tenant.MovedInDate descending select t.tenant.FirstName + " " + t.tenant.LastName).First())</span>
+                                }
+                                else
+                                {
+                                    <span>No tenant</span>
+                                }
+                            }
+
+                        </div>
                         <div class="p-2 ml-auto align-self-center">
-                            <button id="@GetAccordionId("expand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>
+                            <button id="@GetAccordionId("expand", index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>
                         </div>
                     </div>
                 </div>
