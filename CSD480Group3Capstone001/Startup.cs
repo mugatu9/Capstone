@@ -12,6 +12,9 @@ using CSD480Group3Capstone001.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CSD480Group3Capstone001
 {
@@ -39,6 +42,13 @@ namespace CSD480Group3Capstone001
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                             .RequireAuthenticatedUser()
+                             .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
             services.AddRazorPages();
         }
 
@@ -61,6 +71,7 @@ namespace CSD480Group3Capstone001
            
 
             app.UseRouting();
+            
 
             app.UseAuthentication();
             app.UseAuthorization();
