@@ -39,7 +39,6 @@ namespace CSD480Group3Capstone001
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    //Roman was here
                 });
     }
 }
