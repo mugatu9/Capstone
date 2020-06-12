@@ -15,6 +15,8 @@ namespace CSD480Group3Capstone001.Data
                 return; // database is already seeded
             }
 
+           
+
             var buildings = new Building[]
             {
                 new Building {Address = "503 7th Ave", City = "Kirkland", State = "WA", Zip = 66666, OrgName = "Amazon", TaxParcelYear = 1999, TaxParcelAmount = 666},

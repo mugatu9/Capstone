@@ -31,9 +31,13 @@ namespace CSD480Group3Capstone001.MyTagHelper
                 foreach (var user in userManager.Users)
                 {
                     if (user != null && await userManager.IsInRoleAsync(user, role.Name))
-                        names.Add(user.Id);
+                        names.Add(user.Email);
                 }
             }
+
+
+           // output.Content.SetContent(names.Count == 0 ? "No Users" : string.Join(", ", names));
+
             output.Content.SetContent(names.Count == 0 ? "No Users" : string.Join(", ", names));
         }
     }

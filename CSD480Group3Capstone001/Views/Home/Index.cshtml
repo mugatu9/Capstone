@@ -4,5 +4,19 @@
 
     <div class="text-center">
         <h1 class="display-4">Welcome</h1>
-       <img src="~/Images/empire_state.jpg" alt="" width="1529" height="659" />
+        @if (User.IsInRole("admin"))
+                         {
+        <h2>
+            You are Logged in as: an Admin
+        </h2>
+
+            }
+         else{
+    <h2>
+        <a href="C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\Views\Buildings\Search.cshtml">C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\Views\Buildings\Search.cshtml</a>
+        You are Logged in as: a Manager
+    </h2>
+        }
+
+        <img src="~/Images/empire_state.jpg" alt=""  height="60%" />
     </div>

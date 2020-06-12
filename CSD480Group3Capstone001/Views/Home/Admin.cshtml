@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Admin</h1>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li><a asp-area="" asp-controller="Buildings" asp-action="Index">Buildings</a></li>
+        <li><a asp-area="" asp-controller="Tenants" asp-action="Index">Input</a></li>
+        <li><a asp-area="" asp-controller="Vehicles" asp-action="Index">Marks</a></li>
+        <li><a asp-area="" asp-controller="Units" asp-action="Index">Regions</a></li>
+        <li><a asp-area="" asp-controller="Contractors" asp-action="Index">Cluster Bits</a></li>
+        
+    </ul>
+</div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; 2020</p>
+    </footer>
+</div>
