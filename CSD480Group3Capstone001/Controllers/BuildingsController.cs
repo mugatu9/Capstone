@@ -199,8 +199,7 @@ namespace CSD480Group3Capstone001.Controllers
                         tenantIds = _context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString)).Select(v => v.TenantID).ToList();
                         //get all the unitIds where tenantIds are present
                         unitIds = _context.TenantUnits.Where(tu => tenantIds.Contains(tu.TenantID)).Select(tu => tu.UnitID).ToList();
-                        //because we are selecting from the units variable which has been filled with full tenants we will have access to vehicles, build etc in the views.
-
+                        //because we are selecting from the units variable which has been filled with full tenants we will have access to vehicles, build etc in the views
                         break;
                     case "Unit":
                         //TODO: implement search query
@@ -241,7 +240,7 @@ namespace CSD480Group3Capstone001.Controllers
                 foreach (var tu in unit.TenantUnits)
                 {
                     tu.tenant = _context.Tenants.First(t => t.TenantID.Equals(tu.TenantID));
-                    tu.tenant.Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(v.TenantID)).ToList();
+                    tu.tenant.Vehicles = _context.Vehicles.Where(v => v.TenantID.Equals(tu.tenant.TenantID)).ToList();
                 }
             }
             return building;
