@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CSD480Group3Capstone001</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-darkly.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <!-- navbar-light bg-white-->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white  border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CSD480Group3Capstone001</a><span class="glyphicon glyphicon-home" style="margin-right:6px;"></span>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,20 +22,42 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole("admin"))
                          {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Role"
+                                   asp-action="Index">Roles</a>
+                                <a class="dropdown-item" asp-controller="Admin"
+                                   asp-action="ListUsers">Users</a>
+                            </div>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               View
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Tenants"
+                                   asp-action="Search">User View</a>
+                                <a class="dropdown-item" asp-controller="Tenants"
+                                   asp-action="Index">Admin View</a>
+                            </div>
+                        </li>
+
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        else{
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tenants" asp-action="Search">User View</a>
                         </li>
+                        }
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Admin View</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>

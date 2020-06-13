@@ -28,7 +28,7 @@ namespace CSD480Group3Capstone001.Controllers
             return View();
         }
 
-        public IActionResult Admin()
+        public IActionResult Display()
         {
             return View();
         }

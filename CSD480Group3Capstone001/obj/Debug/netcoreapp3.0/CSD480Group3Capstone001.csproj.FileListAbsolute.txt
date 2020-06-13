@@ -403,3 +403,7 @@ C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreap
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
 C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Home\Admin.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Admin\ListUsers.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Admin\Delete.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Home\display.cshtml.g.cs
+C:\Users\sajan\source\repos\Capstone\CSD480Group3Capstone001\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
