@@ -80,7 +80,7 @@
         {
             foreach (var tu in unit.TenantUnits)
             {
-                if (!tu.tenant.MovedOutDate.Equals(null))
+                if (DateTime.Compare(tu.MovedOutDate,DateTime.Now) > 0)
                 {
                     count++;
                 }

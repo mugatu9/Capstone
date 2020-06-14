@@ -24,11 +24,11 @@
                         </div>
                         <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Move In Date</span>
-                            <br />@tenant.MovedInDate.Date.ToString("MM/dd/yyyy")
+                            <br />@tenant.TenantUnits.OrderByDescending(tu => tu.MovedOutDate).Select(tu => tu.MovedInDate).First().Date.ToString("MM/dd/yyyy")
                         </div>
                         <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Move Out Date</span>
-                            <br />@tenant.MovedOutDate
+                            <br />@tenant.TenantUnits.OrderByDescending(tu => tu.MovedOutDate).Select(tu => tu.MovedOutDate).First().Date.ToString("MM/dd/yyyy")
                         </div>
                         <div class="p-2 ml-auto align-self-center">
                             <button id="@GetAccordionId("expand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>
