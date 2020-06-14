@@ -21,7 +21,7 @@
             Tax Parcel
         </dt>
         <dd class="col-sm-10">
-            Amount: @Model.TaxParcelAmount Year: @Model.TaxParcelYear
+            Number: @Model.TaxParcelNumber
         </dd>
 
         @{
@@ -29,35 +29,30 @@
                 Tenants
             </dt>
             <dd class="col-sm-10">
-                <ol>
-                    @foreach (Unit u in Model.Units)
+                @foreach (Unit u in Model.Units)
                     {
-                        foreach (var tu in u.TenantUnits)
+                        foreach (var tu in u.TenantUnits.Where(tu=>DateTime.Compare(tu.MovedOutDate,DateTime.Now) > 0))
                         {
-                            <li>@tu.tenant.FirstName @tu.tenant.LastName</li>
+                            <p>@tu.tenant.FirstName @tu.tenant.LastName</p>
                         }
                     }
-                </ol>
             </dd>
             <dt class="col-sm-2">
                 Vehicles
             </dt>
             <dd class="col-sm-10">
-                <ol>
-                    @foreach (Unit u in Model.Units)
+                @foreach (Unit u in Model.Units)
                     {
-                        foreach (TenantUnit tu in u.TenantUnits)
+                        foreach (TenantUnit tu in u.TenantUnits.Where(tu=>DateTime.Compare(tu.MovedOutDate,DateTime.Now) > 0))
                         {
                             foreach (Vehicle v in tu.tenant.Vehicles)
                             {
-                                <li>@v.Make @v.Model plate number: @v.LicensePlate</li>
+                                <p>@v.Make @v.Model plate number: @v.LicensePlate</p>
                             }
                         }
                     }
-                </ol>
             </dd>
         }
-
     </dl>
 </div>
 

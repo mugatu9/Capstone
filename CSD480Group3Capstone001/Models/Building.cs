@@ -14,13 +14,7 @@ namespace CSD480Group3Capstone001.Models
         public String State { get; set; }
         public int Zip { get; set; }
         public String? OrgName { get; set; }
-        public int TaxParcelYear { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal TaxParcelAmount { get; set; }
+        public long TaxParcelNumber { get; set; }
         public ICollection<Unit> Units { get; set; }
-
-
-        
     }
 }

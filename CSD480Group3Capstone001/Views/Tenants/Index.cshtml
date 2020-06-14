@@ -20,16 +20,10 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employer)
+                @Html.DisplayNameFor(model => model.Employment)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Salary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MovedInDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MovedOutDate)
             </th>
             <th></th>
         </tr>
@@ -44,16 +38,10 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employer)
+                @Html.DisplayFor(modelItem => item.Employment)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovedInDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovedOutDate)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TenantID">Edit</a> |

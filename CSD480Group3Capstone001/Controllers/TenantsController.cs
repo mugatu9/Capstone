@@ -154,7 +154,7 @@ namespace CSD480Group3Capstone001.Controllers
             return _context.Tenants.Any(e => e.TenantID == id);
         }
 
-        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit#", "Street Address","City","State","Zip Code", "Employer", "Delinquent Rent", "Test" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchAreas =  new List<string>() { "Name", "License Plate", "Unit#", "Street Address","City","State","Zip Code", "Employment" };//this is where you put more option for the drop down
 
     // GET: Tenants/Search
     public IActionResult Search()
@@ -243,34 +243,8 @@ namespace CSD480Group3Capstone001.Controllers
                         //get only the tenants that have tenant ids in the ids from above
                         tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;
-                    case "Delinquent Rent":
-                        var goodTenants = from R in _context.RentPayments join
-                                          T in _context.Tenants on R.TenantID equals T.TenantID
-                                           where (R.Date > DateTime.Now.AddDays(-30))  //R.Date < DateTime.Now && 
-                                          select T;
-                        var allTenants = from T in _context.Tenants
-                                         select T;
-                        var badTenants = (allTenants.AsEnumerable().Except(goodTenants.AsEnumerable()));
-                        tenants = (from T in badTenants
-                                  select T).ToList();
-
-                        break;
-                    case "Test":
-                        int unitId = 5; // this will be a parameter passed to this query through a function
-                        var unitTenants = from U in _context.Units join
-                                               Tu in _context.TenantUnits on U.UnitID equals Tu.UnitID join
-                                               T in _context.Tenants on Tu.TenantID equals T.TenantID
-                                               where U.UnitID == unitId
-                                               select T;
-                        Tenant mostRecentTenant = unitTenants.OrderByDescending(m => m.MovedInDate).FirstOrDefault();
-                     
-                        tenants.Clear();
-                        tenants.Add(mostRecentTenant);
-
-                        break;
-                        //TODO: add more search cases and queries
-                    case "Employer":
-                        tenants = tenants.Where(t => t.Employer.ToLower().Contains(searchString)).ToList();
+                    case "Employment":
+                        tenants = tenants.Where(t => t.Employment.ToLower().Contains(searchString)).ToList();
                         break;
                     //TODO: add more search cases and queries, make sure to add the case string to the searchAreas list
                     default:
