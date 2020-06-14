@@ -286,8 +286,7 @@ namespace CSD480Group3Capstone001.Controllers
 
 
             var tax = await _context.Buildings
-                .Include(t => t.TaxParcelAmount)
-                .Include(y => y.TaxParcelYear)
+                .Include(t => t.TaxParcelNumber)
                 .FirstOrDefaultAsync(t => t.BuildingID == id);
 		        return View(tax);
 		    }

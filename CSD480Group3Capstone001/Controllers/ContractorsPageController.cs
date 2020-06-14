@@ -133,7 +133,8 @@ namespace CSD480Group3Capstone001.Controllers
 
         private RepairHistory GetFullRepairHistory(RepairHistory rh)
         {
-            rh.Unit = _context.Units.First(u => u.UnitID.Equals(rh.UnitID));
+            rh.Unit = _context.Units.FirstOrDefault(u => u.UnitID.Equals(rh.UnitID));
+            rh.Building = _context.Buildings.FirstOrDefault(b => b.BuildingID.Equals(rh.BuidlingID));
             rh.Contractor = _context.Contractors.First(c => c.ContractorID.Equals(rh.ContractorID));
             return rh;
         }

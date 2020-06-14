@@ -6,6 +6,40 @@
         <hr />
         <dl class="row">
             <dt class="col-sm-4">
+                Company
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Contractor.Company
+            </dd>
+            <dt class="col-sm-4">
+                Description
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Notes
+            </dd>
+            <dt class="col-sm-4">
+                Building
+            </dt>
+            <dd class="col-sm-6">
+                @{
+                    if (Model.Building != null)
+                    {
+                        @Model.Building.Address
+                    }
+                }
+            </dd>
+            @{
+                    if (Model.Unit != null)
+                    {
+                        <dt class="col-sm-4">
+                             Unit
+                         </dt>
+                        <dd class="col-sm-6">
+                            @Model.Unit.UnitNumber
+                        </dd>
+                    }
+                }
+            <dt class="col-sm-4">
                 Start Date
             </dt>
             <dd class="col-sm-6">
@@ -28,18 +62,6 @@
             </dt>
             <dd class="col-sm-6">
                 @Model.Paid
-            </dd>
-            <dt class="col-sm-4">
-                Unit
-            </dt>
-            <dd class="col-sm-6">
-                @Model.Unit.UnitNumber
-            </dd>
-            <dt class="col-sm-4">
-                Contracting company
-            </dt>
-            <dd class="col-sm-6">
-                @Model.Contractor.Company
             </dd>
         </dl>
     </div>
