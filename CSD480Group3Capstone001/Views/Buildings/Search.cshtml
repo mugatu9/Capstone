@@ -16,7 +16,7 @@
 
 
 
-<div class="border border-dark rounded p-2 pt-3">
+<div class="border border-dark rounded p-2 pt-3" style="min-height:450px">
     <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Buildings" asp-action="Search">
         <div class="col-12 d-flex p-0 flex-wrap">
             <button type="submit" class="btn-sm border border-dark btn-primary ml-1 mr-1 mb-1">Search</button>
@@ -35,7 +35,7 @@
                 <select class="custom-select border-dark" name="searchBy" id="searchForSelect">
                     @{
 
-                        List<string> searchAreas = UnitsController.GetSearchAreas();
+                        List<string> searchAreas = BuildingsController.GetSearchAreas();
 
                         string searchBy = (string)ViewData["searchBy"];
                         if (!string.IsNullOrEmpty(searchBy))

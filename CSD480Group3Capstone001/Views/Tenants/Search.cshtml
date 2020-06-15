@@ -15,7 +15,7 @@
 
 
 
-<div class="border border-dark rounded p-2">
+<div class="border border-dark rounded p-2" style="min-height:450px">
     <h2>Tenant Search</h2>
     <hr class="border-dark" />
     <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Tenants" asp-action="Search">
@@ -55,8 +55,40 @@
                     }
                 </select>
             </div>
+            <div class="d-flex col-12 flex-fill justify-content-around m-1">
+                <div class="form-check">
+                    @{
+                        if (ViewData["lateRentOnly"] != null && (bool)ViewData["lateRentOnly"])
+                        {
+                            <input class="form-check-input" type="checkbox" value="Checked" checked name="lateRentOnly" id="lateRentOnly">
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" value="Checked" name="lateRentOnly" id="lateRentOnly">
+                        }
+                    }
+                    <label class="form-check-label" for="lateRentOnly">
+                        Display Tenants With Late Rent Only
+                    </label>
+                </div>
+                <div class="form-check">
+                    @{
+                        if (ViewData["UnpaidFines"] != null && (bool)ViewData["UnpaidFines"])
+                        {
+                            <input class="form-check-input" type="checkbox" value="Checked" checked name="UnpaidFines" id="UnpaidFines">
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" value="Checked" name="UnpaidFines" id="UnpaidFines">
+                        }
+                    }
+                    <label class="form-check-label" for="UnpaidFines">
+                        Display Tenants With Unpaid Fines Only
+                    </label>
+                </div>
+            </div>
         </div>
-    </form>
+</form>
     <hr class="border-dark" />
     @{
         if (Model.Any())

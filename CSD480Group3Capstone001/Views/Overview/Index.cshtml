@@ -1,8 +1,107 @@
-﻿
+﻿@using Microsoft.AspNetCore.Razor.Language.Intermediate
+@using Microsoft.CodeAnalysis.CSharp.Syntax
+@model CSD480Group3Capstone001.Views.Overview.OverViewModel
 @{
     ViewData["Title"] = "Overview";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+<style>
+    .chart {
+        width: 100%;
+        min-height: 450px;
+    }
 
-<h1>Overview</h1>
+    .row {
+        margin: 0 !important;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    var datag = [];
+    datag.push(['Date', 'Rent Collected']);
+
+    @{
+        var grouped = from p in Model.RentPayments.OrderBy(r=>r.Date)
+            group p by new {month = p.Date.Month, year = p.Date.Year}
+            into d
+            select new {d.Key.month, d.Key.year, amount = d.Sum(d=>d.Amount)};
+    }
+
+    @foreach (var r in grouped)
+    {
+        <text>
+            datag.push([ @r.month+"/"+@r.year , @r.amount ]);
+        </text>
+    }
+
+    var datag1 = [];
+    datag1.push(['Date', 'Total Appraised Property value']);
+
+
+    @foreach (var r in Model.Buildings.OrderBy(b=>b.PurchaseDate))
+    {
+        <text>
+            datag1.push([
+                @r.PurchaseDate.Month + "/" + @r.PurchaseDate.Year,
+                @Model.Buildings.Where(b=>DateTime.Compare(b.PurchaseDate,r.PurchaseDate) < 0).Sum(b=>b.AppraisedValue)
+            ]);
+        </text>
+    }
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart1);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(datag);
+
+        var options = {
+            title: 'Total Rent Collected Each Month',
+            curveType: 'function',
+            vAxis: {format: 'currency'},
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChart1() {
+        var data = google.visualization.arrayToDataTable(datag1);
+
+        var options = {
+            title: 'Total Appraised Property Value',
+            vAxis: {format: 'currency'},
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart1'));
+
+        chart.draw(data, options);
+    }
+
+    $(window).resize(function () {
+        console.log("Resize");
+        drawChart();
+        drawChart1();
+    });
+</script>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="border border-dark rounded m-3">
+            <div id="curve_chart" class="chart"></div>
+        </div>
+        
+    </div>
+    <div class="col-lg-6">
+        <div class="border border-dark rounded m-3">
+            <div id="curve_chart1" class="chart"></div>
+        </div>
+        
+    </div>
+</div>
 

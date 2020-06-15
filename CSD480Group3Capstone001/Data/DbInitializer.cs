@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace CSD480Group3Capstone001.Data
 {
@@ -15,15 +14,15 @@ namespace CSD480Group3Capstone001.Data
             context.Database.EnsureCreated();
             if (context.Buildings.Any()) {
                 ClearDb(context);
-               // return;
+                //return;
             }
 
 
             var buildings = new Building[]
             {
-                new Building {Address = "503 7th Ave", City = "Kirkland", State = "WA", Zip = 98033, OrgName = "Kirkland Property Group", TaxParcelNumber = 9517200430},
-                new Building {Address = "417 4th Ave N", City = "Lynnwood", State = "WA", Zip = 98072, OrgName = "Lynnwood Property Group", TaxParcelNumber = 1927300900},
-                new Building {Address = "111 12th st", City = "Seattle", State = "WA", Zip = 98032, OrgName = "Seattle Property Group", TaxParcelNumber = 9517300100}
+                new Building {Address = "503 7th Ave", City = "Kirkland", State = "WA", Zip = 98033, OrgName = "Kirkland Property Group", TaxParcelNumber = 9517200430, AppraisedValue = 375000, PurchaseDate = DateTime.Parse("2017-05-01")},
+                new Building {Address = "417 4th Ave N", City = "Lynnwood", State = "WA", Zip = 98072, OrgName = "Lynnwood Property Group", TaxParcelNumber = 1927300900, AppraisedValue = 150000,PurchaseDate = DateTime.Parse("2019-01-01")},
+                new Building {Address = "111 12th st", City = "Seattle", State = "WA", Zip = 98032, OrgName = "Seattle Property Group", TaxParcelNumber = 9517300100,AppraisedValue = 412000,PurchaseDate = DateTime.Parse("2017-06-01")}
             };
             context.Buildings.AddRange(buildings);
             context.SaveChanges();
@@ -49,16 +48,16 @@ namespace CSD480Group3Capstone001.Data
             context.SaveChanges();
             var contractors = new Contractor[]
                 {
-                    new Contractor {Company = "Beacon Plumbing", Specialty = "Plumbing"},
-                    new Contractor {Company = "Lake East Landscape", Specialty = "Landscaping"},
-                    new Contractor {Company = "Reliable Floor Coverings", Specialty = "Flooring"},
-                    new Contractor {Company = "Molly Maid", Specialty = "Cleaning"},
-                    new Contractor {Company = "Mark Construction inc", Specialty = "Construction"},
-                    new Contractor {Company = "B&E Heating", Specialty = "Heating"},
-                    new Contractor {Company = "Southwest Plumbing", Specialty = "Plumbing"},
-                    new Contractor {Company = "Bradley Paint", Specialty = "Painting"},
-                    new Contractor {Company = "Edmonds Landscaping", Specialty = "Landscaping"},
-                    new Contractor {Company = "A&E Construction", Specialty = "Construction"},
+                    new Contractor {Company = "Beacon Plumbing", Specialty = "Plumbing", PhoneNumber = "(206) 364-5205"},
+                    new Contractor {Company = "Lake East Landscape", Specialty = "Landscaping", PhoneNumber = "(206) 825-1979"},
+                    new Contractor {Company = "Reliable Floor Coverings", Specialty = "Flooring", PhoneNumber = "(206) 926-2370"},
+                    new Contractor {Company = "Molly Maid", Specialty = "Cleaning", PhoneNumber = "(206) 344-8959"},
+                    new Contractor {Company = "Mark Construction inc", Specialty = "Construction", PhoneNumber = "(206) 274-3152"},
+                    new Contractor {Company = "B&E Heating", Specialty = "Heating", PhoneNumber = "(206) 776-5223"},
+                    new Contractor {Company = "Southwest Plumbing", Specialty = "Plumbing", PhoneNumber = "(206) 243-1994"},
+                    new Contractor {Company = "Bradley Paint", Specialty = "Painting", PhoneNumber = "(206) 331-6657"},
+                    new Contractor {Company = "Edmonds Landscaping", Specialty = "Landscaping", PhoneNumber = "(206) 928-6138"},
+                    new Contractor {Company = "A&E Construction", Specialty = "Construction", PhoneNumber = "(206) 817-4522"},
                 };
             context.Contractors.AddRange(contractors);
             context.SaveChanges();
@@ -181,16 +180,16 @@ namespace CSD480Group3Capstone001.Data
             context.SaveChanges();
             var tenants = new Tenant[]
                 {
-                    new Tenant {FirstName = "Nathan", LastName = "O'Brien", Employment = "Developer", Salary = 132000},
-                    new Tenant {FirstName = "Donald", LastName = "Duck", Employment = "Disney", Salary = 78000},
-                    new Tenant {FirstName = "Shrek", LastName = "Swamp", Employment = "Self Employed", Salary = 120000 },
-                    new Tenant {FirstName = "Lord", LastName = "Farquad", Employment = "Ruler", Salary = 95000},
-                    new Tenant {FirstName = "Don", LastName = "Corleone", Employment = "The Mob", Salary = 470000 },
-                    new Tenant {FirstName = "Ryan", LastName = "Gosling", Employment = "Actor", Salary = 5500000},
-                    new Tenant {FirstName = "Alice", LastName = "Cooper", Employment = "Rock", Salary = 650000 },
-                    new Tenant {FirstName = "Donald", LastName = "Trump", Employment = "President", Salary = 450000},
-                    new Tenant {FirstName = "Vincent", LastName = "Price", Employment = "Horror Films", Salary = 36000},
-                    new Tenant {FirstName = "Jeff", LastName = "Lebowski", Employment = "Self Employed", Salary = 27000}
+                    new Tenant {FirstName = "Nathan", LastName = "O'Brien", Employment = "Developer", Salary = 132000,PhoneNumber="206-450-2788"},
+                    new Tenant {FirstName = "Donald", LastName = "Duck", Employment = "Disney", Salary = 78000,PhoneNumber="213-877-8960"},
+                    new Tenant {FirstName = "Shrek", LastName = "Swamp", Employment = "Self Employed", Salary = 120000 ,PhoneNumber="213-613-2953"},
+                    new Tenant {FirstName = "Lord", LastName = "Farquad", Employment = "Ruler", Salary = 95000,PhoneNumber="213-236-0238"},
+                    new Tenant {FirstName = "Don", LastName = "Corleone", Employment = "The Mob", Salary = 470000 ,PhoneNumber="206-709-4594"},
+                    new Tenant {FirstName = "Ryan", LastName = "Gosling", Employment = "Actor", Salary = 5500000,PhoneNumber="213-520-3215"},
+                    new Tenant {FirstName = "Alice", LastName = "Cooper", Employment = "Rock", Salary = 650000 ,PhoneNumber="213-529-9730"},
+                    new Tenant {FirstName = "Donald", LastName = "Trump", Employment = "President", Salary = 450000,PhoneNumber="206-984-9324"},
+                    new Tenant {FirstName = "Vincent", LastName = "Price", Employment = "Horror Films", Salary = 36000,PhoneNumber="206-584-1819"},
+                    new Tenant {FirstName = "Jeff", LastName = "Lebowski", Employment = "Self Employed", Salary = 27000,PhoneNumber="213-525-5175"}
                 };
             context.Tenants.AddRange(tenants);
             context.SaveChanges();

@@ -12,6 +12,12 @@
                 @Model.Contractor.Company
             </dd>
             <dt class="col-sm-4">
+                Phone#
+            </dt>
+            <dd class="col-sm-6">
+                @Model.Contractor.PhoneNumber
+            </dd>
+            <dt class="col-sm-4">
                 Description
             </dt>
             <dd class="col-sm-6">
@@ -29,33 +35,43 @@
                 }
             </dd>
             @{
-                    if (Model.Unit != null)
-                    {
-                        <dt class="col-sm-4">
-                             Unit
-                         </dt>
-                        <dd class="col-sm-6">
-                            @Model.Unit.UnitNumber
-                        </dd>
-                    }
+                if (Model.Unit != null)
+                {
+                    <dt class="col-sm-4">
+                        Unit
+                    </dt>
+                    <dd class="col-sm-6">
+                        @Model.Unit.UnitNumber
+                    </dd>
                 }
+            }
             <dt class="col-sm-4">
                 Start Date
             </dt>
             <dd class="col-sm-6">
-                @Model.StartDate
+                @Model.StartDate.ToString("MM/dd/yyyy")
             </dd>
             <dt class="col-sm-4">
                 Finsh Date
             </dt>
             <dd class="col-sm-6">
-                @Model.FinishDate
+                @{
+                    if (Model.FinishDate != null)
+                    {
+                        var date = ((DateTime)Model.FinishDate).ToString("MM/dd/yyyy");
+                        <span>@date</span>
+                    }
+                    else
+                    {
+                        <span style="color:red">Unfinished</span>
+                    }
+                }
             </dd>
             <dt class="col-sm-4">
                 Cost
             </dt>
             <dd class="col-sm-6">
-                @Model.Cost
+                @string.Format("{0:C}", Model.Cost)
             </dd>
             <dt class="col-sm-4">
                 Paid

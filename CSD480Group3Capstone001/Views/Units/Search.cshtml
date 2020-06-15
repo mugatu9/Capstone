@@ -15,7 +15,7 @@
 
 
 
-<div class="border border-dark rounded p-2 pt-3">
+<div class="border border-dark rounded p-2 pt-3" style="min-height:450px">
     <form class="row col-12 ml-auto mr-auto p-0" asp-controller="Units" asp-action="Search">
         <div class="col-12 d-flex p-0 flex-wrap">
             <button type="submit" class="btn-sm border border-dark btn-primary ml-1 mr-1 mb-1">Search</button>
@@ -52,6 +52,22 @@
                         }
                     }
                 </select>
+            </div>
+            <br/>
+            <div class="form-check ml-2">
+                @{
+                    if (ViewData["VacantUnitsOnly"] != null && (bool)ViewData["VacantUnitsOnly"])
+                    {
+                        <input class="form-check-input" type="checkbox" value="Checked" checked name="VacantUnitsOnly" id="VacantUnitsOnly">
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" value="Checked" name="VacantUnitsOnly" id="VacantUnitsOnly">
+                    }
+                }
+            <label class="form-check-label" for="VacantUnitsOnly">
+                Display Unoccupied Units Only
+            </label>
             </div>
         </div>
     </form>
