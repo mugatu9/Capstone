@@ -15,6 +15,8 @@ namespace CSD480Group3Capstone001.Models
         public int Zip { get; set; }
         public String? OrgName { get; set; }
         public long TaxParcelNumber { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public Decimal AppraisedValue { get; set; }
         public ICollection<Unit> Units { get; set; }
     }
 }

@@ -20,23 +20,11 @@
                             <br />#@unit.UnitNumber
                         </div>
                         <div class="p-2 text-center">
-                            <span class="font-weight-bold">Building Address</span>
-                            <br />@unit.Building.Address
-                        </div>
-                        <div class="p-2 text-center d-none d-sm-block">
-                            <span class="font-weight-bold">Number of Tenants</span>
-                            <br />@unit.TenantUnits.Where(tu => DateTime.Compare(tu.MovedOutDate, DateTime.Now) > 0).Count()
-                        </div>
-                        <div class="p-2 text-center d-none d-sm-block">
-                            <span class="font-weight-bold">Square Footage</span>
-                            <br />@unit.SqrFootage
-                        </div>
-                        <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Current Tenant</span>
                             <br />
                             @{
                                 string currTenant = unit.TenantUnits.Where(tu => DateTime.Compare(tu.MovedOutDate, DateTime.Now) > 0).Select(tu => tu.tenant.FirstName + " " + tu.tenant.LastName).FirstOrDefault();
-                                if(currTenant != null)
+                                if (currTenant != null)
                                 {
                                     @currTenant
                                 }
@@ -46,6 +34,18 @@
                                 }
                             }
 
+                        </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Number of Tenants</span>
+                            <br />@unit.TenantUnits.Where(tu => DateTime.Compare(tu.MovedOutDate, DateTime.Now) > 0).Count()
+                        </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Square Footage</span>
+                            <br />@unit.SqrFootage
+                        </div>
+                        <div class="p-2 text-centerd-none d-sm-block">
+                            <span class="font-weight-bold">Building Address</span>
+                            <br />@unit.Building.Address
                         </div>
                         <div class="p-2 ml-auto align-self-center">
                             <button id="@GetAccordionId("expand", index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>

@@ -1,4 +1,6 @@
-﻿@model CSD480Group3Capstone001.Models.Tenant
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+@using Microsoft.EntityFrameworkCore.Internal
+@model CSD480Group3Capstone001.Models.Tenant
 
 
 <div>
@@ -10,6 +12,12 @@
             @Model.FirstName @Model.LastName
         </dd>
         <dt class="col-sm-2">
+            Phone Number
+        </dt>
+        <dd class="col-sm-10">
+            @Model.PhoneNumber
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Employment)
         </dt>
         <dd class="col-sm-10">
@@ -19,43 +27,104 @@
             @Html.DisplayNameFor(model => model.Salary)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Salary)
+            @string.Format("{0:C}", Model.Salary)
         </dd>
         <dt class="col-sm-2">
-            Moved In Date
+            Moved In
         </dt>
         <dd class="col-sm-10">
-            @Model.TenantUnits.OrderByDescending(tu=>tu.MovedOutDate).Select(tu=>tu.MovedInDate).First()
+            @Model.TenantUnits.OrderByDescending(tu => tu.MovedOutDate).Select(tu => tu.MovedInDate).First().Date.ToString("MM/dd/yyyy")
         </dd>
         <dt class="col-sm-2">
-            Moved Out Date
+            Moved Out
         </dt>
         <dd class="col-sm-10">
-            @Model.TenantUnits.OrderByDescending(tu => tu.MovedOutDate).Select(tu => tu.MovedOutDate).First()
+            @{
+                var moveOutDate = Model.TenantUnits.OrderByDescending(tu => tu.MovedOutDate).Select(tu => tu.MovedOutDate).First();
+                <text>@moveOutDate.Date.ToString("MM/dd/yyyy")</text>
+            }
         </dd>
-        @{
-            <dt class="col-sm-2">
-               License Plates
-            </dt>
-            <dd class="col-sm-10">
-
-                @foreach (var vehicle in Model.Vehicles)
+        <dt class="col-sm-2">
+            Last Rent Payment
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var lastrent = Model.RentPayments.OrderByDescending(tu => tu.Date).FirstOrDefault();
+                if (lastrent != null)
                 {
-                    <p>@vehicle.LicensePlate </p>
+                    if (DateTime.Compare(lastrent.Date, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)) < 0 && DateTime.Compare(moveOutDate, DateTime.Now) >= 0)
+                    {
+                        <span style="color: red"> Date: @lastrent.Date.ToString("MM/dd/yyyy") Amount: $@lastrent.Amount)</span>
+                    }
+                    else
+                    {
+                        <span > Date: @lastrent.Date.ToString("MM/dd/yyyy") Amount: $@lastrent.Amount)</span>
+                    }
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Vehicles
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.Vehicles.Any())
+                {
+                    foreach (Vehicle v in Model.Vehicles)
+                    {
+                        <p>@v.Color @v.Make @v.Model, Plate Number: @v.LicensePlate</p>
+                    }
+                }
+                else
+                {
+                    <p>No Vehicles</p>
+                }
+            }
+        </dd>
+
+        <dt class="col-sm-2">
+            Current Unit
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var unit = Model.TenantUnits.FirstOrDefault(tu => DateTime.Compare(tu.MovedOutDate, DateTime.Now) > 0);
+                if (unit != null)
+                {
+                    <span>Unit @unit.unit.UnitNumber @unit.unit.Building.Address @unit.unit.Building.City @unit.unit.Building.State @unit.unit.Building.Zip </span>
+                }
+                else
+                {
+                    <span>None</span>
                 }
 
-            </dd>
-            <dt class="col-sm-2">
-                Addresses
-            </dt>
-            <dd class="col-sm-10">
-                @foreach (var tu in Model.TenantUnits)
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Infractions
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.Infractions.Any())
                 {
-                <span>Unit @tu.unit.UnitNumber @tu.unit.Building.Address @tu.unit.Building.City @tu.unit.Building.State @tu.unit.Building.Zip </span>
-                }
-            </dd>
+                    foreach (var v in Model.Infractions.OrderBy(i=>i.Date))
+                    {
+                        if (!v.Paid)
+                        {
+                            <p style="color:red">Date: @v.Date.ToString("MM/dd/yyyy"), Reason: @v.Reason, Fine: @v.Amount, Paid: @v.Paid</p>
+                        }
+                        else
+                        {
+                            <p>Date: @v.Date.ToString("MM/dd/yyyy"), Reason: @v.Reason, Fine: @v.Amount, Paid: @v.Paid</p>
+                        }
 
-        }
+                    }
+                }
+                else
+                {
+                    <p>No Infractions</p>
+                }
+            }
+        </dd>
     </dl>
 </div>
 

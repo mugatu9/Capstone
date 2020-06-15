@@ -15,16 +15,16 @@
                 <div class="card-header row border border-dark rounded p-0 mt-2" id="@GetAccordionId("header",index)">
                     <div class="col-12 d-flex">
                         <div class="p-2 text-center">
-                            <span class="font-weight-bold p-2">Id</span>
-                            <br />#@tenant.TenantID
-                        </div>
-                        <div class="p-2 text-center">
                             <span class="font-weight-bold">Tenant Name</span>
                             <br />@tenant.FirstName @tenant.LastName
                         </div>
                         <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Move In Date</span>
                             <br />@tenant.TenantUnits.OrderByDescending(tu => tu.MovedOutDate).Select(tu => tu.MovedInDate).First().Date.ToString("MM/dd/yyyy")
+                        </div>
+                        <div class="p-2 text-center">
+                            <span class="font-weight-bold">Phone Number</span>
+                            <br />@tenant.PhoneNumber
                         </div>
                         <div class="p-2 text-center d-none d-sm-block">
                             <span class="font-weight-bold">Move Out Date</span>

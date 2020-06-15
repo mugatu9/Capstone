@@ -15,35 +15,52 @@
             @Html.DisplayFor(model => model.SqrFootage)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Building)
+            Building Address
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Building.BuildingID)
+            @Model.Building.Address @Model.Building.City @Model.Building.State @Model.Building.Zip
         </dd>
-
-
         @{
             <dt class="col-sm-2">
-                Tenants
-            </dt>
-
-            <dd class="col-sm-10">
                 @{
                     var list = Model.TenantUnits.Where(ut => DateTime.Compare(ut.MovedOutDate, DateTime.Now) > 0);
                     if (list.Any())
                     {
-                 
-                        @foreach (TenantUnit tu in list)
-                        {
-
-                            <p>@tu.tenant.FirstName @tu.tenant.LastName</p>
-
-                        }
-          
+                        <text>Tenants</text>
                     }
                     else
                     {
-                        <p>Unoccupied</p>
+                        <text>Previous Tenant</text>
+                    }
+                }
+
+            </dt>
+
+            <dd class="col-sm-10">
+                @{
+                    
+                    if (list.Any())
+                    {
+
+                        @foreach (TenantUnit tu in list)
+                        {
+
+                <p>@tu.tenant.FirstName @tu.tenant.LastName, Move In: @tu.MovedInDate.Date.ToString("MM/dd/yyyy"), Move Out:@tu.MovedOutDate.Date.ToString("MM/dd/yyyy")</p>
+
+                        }
+
+                    }
+                    else
+                    {
+                        var tu = Model.TenantUnits.OrderBy(tu => tu.MovedOutDate).FirstOrDefault();
+                        if (tu != null)
+                        {
+                <p>@tu.tenant.FirstName @tu.tenant.LastName, Move In: @tu.MovedInDate.Date.ToString("MM/dd/yyyy"), Move Out:@tu.MovedOutDate.Date.ToString("MM/dd/yyyy")</p>
+                        }
+                        else
+                        {
+                            <p>No Previous Tenant</p>
+                        }
                     }
 
                 }
@@ -56,7 +73,6 @@
                     list = Model.TenantUnits.Where(ut => DateTime.Compare(ut.MovedOutDate, DateTime.Now) > 0);
                     if (list.Any())
                     {
-                        <table>
                         @foreach (TenantUnit tu in Model.TenantUnits.Where(ut => DateTime.Compare(ut.MovedOutDate, DateTime.Now) > 0))
                         {
                             foreach (Vehicle v in tu.tenant.Vehicles)
@@ -64,7 +80,6 @@
                                 <p>@v.Color @v.Make @v.Model plate number: @v.LicensePlate</p>
                             }
                         }
-                        </table>   
                     }
                     else
                     {
@@ -73,7 +88,6 @@
                 }
             </dd>
         }
-
     </dl>
 </div>
 

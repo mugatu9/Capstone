@@ -30,6 +30,10 @@
                             <span class="font-weight-bold">Square Footage</span>
                             <br />@getSquareFootage(building)
                         </div>
+                        <div class="p-2 text-center d-none d-sm-block">
+                            <span class="font-weight-bold">Number Of Units</span>
+                            <br />@building.Units.Count()
+                        </div>
                         <div class="p-2 ml-auto align-self-center">
                             <button id="@GetAccordionId("expand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("body",index),@GetAccordionId("expand",index),@GetAccordionId("hide",index)" aria-controls="@GetAccordionId("body",index)">Expand</button>
                         </div>

@@ -167,10 +167,23 @@ namespace CSD480Group3Capstone001.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Search(string searchString, string searchBy )
+        public IActionResult Search(string searchString, string searchBy, string lateRentOnly, string UnpaidFines)
         {
             List<Tenant> tenants = _context.Tenants.ToList();
-
+            if (lateRentOnly != null)
+            {
+                var stillLiveHere = _context.TenantUnits.Where(rh => DateTime.Compare(rh.MovedOutDate, DateTime.Now) > 0).Select(u => u.TenantID);
+                var firstOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var paidRent = _context.RentPayments.Where(rp=>DateTime.Compare(rp.Date, firstOfMonth) >= 0).Select(u => u.TenantID);
+                tenants = tenants.Where(c => stillLiveHere.Contains(c.TenantID) && !paidRent.Contains(c.TenantID)).ToList();
+                ViewData["lateRentOnly"] = true;
+            }
+            if (UnpaidFines != null)
+            {
+                var tenantIds = _context.Infractions.Where(i => !i.Paid).Select(i => i.TenantID);
+                tenants = tenants.Where(c => tenantIds.Contains(c.TenantID)).ToList();
+                ViewData["UnpaidFines"] = true;
+            }
             if (!String.IsNullOrEmpty(searchString))
             {
                 ViewData["searchString"] = searchString;

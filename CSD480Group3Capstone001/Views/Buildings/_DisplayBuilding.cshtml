@@ -6,12 +6,6 @@
     } 
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BuildingID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BuildingID)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OrgName)
         </dt>
         <dd class="col-sm-10">
@@ -21,7 +15,7 @@
             Tax Parcel
         </dt>
         <dd class="col-sm-10">
-            Number: @Model.TaxParcelNumber
+            @Model.TaxParcelNumber
         </dd>
 
         @{

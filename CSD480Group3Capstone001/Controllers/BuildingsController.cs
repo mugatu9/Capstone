@@ -151,7 +151,7 @@ namespace CSD480Group3Capstone001.Controllers
         }
 
 
-        private static readonly List<string> SearchAreas = new List<string>() { "Tenant Name", "License Plate", "Unit", "Building", "Employer" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchAreas = new List<string>() { "Tenant Name", "License Plate", "Building Address"};//this is where you put more option for the drop down
 
         // GET: Tenants/Search
         public IActionResult Search()
@@ -188,7 +188,7 @@ namespace CSD480Group3Capstone001.Controllers
                         //get tenant ids of tenants whose names match the search query
                         var tenantIds = _context.Tenants.Where(t => t.FirstName.ToLower().Contains(searchString) || t.LastName.ToLower().Contains(searchString) || (t.FirstName.ToLower() + " " + t.LastName.ToLower()).Contains(searchString)).Select(t => t.TenantID).ToList();
                         //get all the unitIds where tenantIds are present
-                        var unitIds = _context.TenantUnits.Where(tu => tenantIds.Contains(tu.TenantID)).Select(tu => tu.UnitID).ToList();
+                        var unitIds = _context.TenantUnits.Where(tu => tenantIds.Contains(tu.TenantID) && DateTime.Compare(tu.MovedOutDate,DateTime.Now) > 0).Select(tu => tu.UnitID).ToList();
                         //Get the building ids
                         var buildingIds = _context.Units.Where(u => unitIds.Contains(u.UnitID)).Select(u => u.BuildingID).ToList();
 
@@ -196,19 +196,16 @@ namespace CSD480Group3Capstone001.Controllers
                         break;
                     case "License Plate":
                         //get all the tenanatIds that are associated with a vehicle license plate that matches the search string
-                        tenantIds = _context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString)).Select(v => v.TenantID).ToList();
+                        tenantIds = _context.Vehicles.Where(v => v.LicensePlate.ToLower().Contains(searchString) ).Select(v => v.TenantID).ToList();
                         //get all the unitIds where tenantIds are present
-                        unitIds = _context.TenantUnits.Where(tu => tenantIds.Contains(tu.TenantID)).Select(tu => tu.UnitID).ToList();
+                        unitIds = _context.TenantUnits.Where(tu => tenantIds.Contains(tu.TenantID) && DateTime.Compare(tu.MovedOutDate, DateTime.Now) > 0).Select(tu => tu.UnitID).ToList();
                         //because we are selecting from the units variable which has been filled with full tenants we will have access to vehicles, build etc in the views
+                        buildingIds = _context.Units.Where(u => unitIds.Contains(u.UnitID)).Select(u => u.BuildingID).ToList();
+
+                        buildings = buildings.Where(b => buildingIds.Contains(b.BuildingID)).ToList();
                         break;
-                    case "Unit":
-                        //TODO: implement search query
-                        break;
-                    case "Building":
-                        //TODO: implement search query
-                        break;
-                    case "Employer":
-                        //TODO: implement search query
+                    case "Building Address":
+                        buildings = buildings.Where(b => b.Address.ToLower().Contains(searchString)).ToList();
                         break;
                     //TODO: add more search cases and queries, make sure to add the case string to the searchAreas list
                     default:

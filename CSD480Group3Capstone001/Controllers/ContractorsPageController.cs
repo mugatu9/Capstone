@@ -33,7 +33,7 @@ namespace CSD480Group3Capstone001.Controllers
 
 
 
-        private static readonly List<string> SearchContractorAreas = new List<string>() { "Specialty" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchContractorAreas = new List<string>() { "Specialty", "Company" };//this is where you put more option for the drop down
 
         private static readonly List<string> SearchWorkOrderAreas = new List<string>() { "Company" };//this is where you put more option for the drop down
   
@@ -42,16 +42,9 @@ namespace CSD480Group3Capstone001.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(string contractSearchString, string contractSearchBy, string previousContractorsOnly, string repairSearchString, string repairSearchBy)
+        public IActionResult Index(string contractSearchString, string contractSearchBy, string repairSearchString, string repairSearchBy , string Unfinished)
         {
             List<Contractor> contractors = _context.Contractors.ToList();
-
-            if (previousContractorsOnly != null)
-            {
-                var contractorIds = _context.RepairHistories.Select(rh => rh.ContractorID);
-                contractors = contractors.Where(c => contractorIds.Contains(c.ContractorID)).ToList();
-                ViewData["previousContractorsOnly"] = true;
-            }
 
             if (!String.IsNullOrEmpty(contractSearchString))
             {
@@ -72,6 +65,10 @@ namespace CSD480Group3Capstone001.Controllers
                         //get contractors whos Specialty match the search query
                         contractors = contractors.Where(c => c.Specialty.ToLower().Contains(contractSearchString)).ToList();
                         break;
+                    case "Company":
+                        //get contractors whos Specialty match the search query
+                        contractors = contractors.Where(c => c.Company.ToLower().Contains(contractSearchString)).ToList();
+                        break;
                     default:
                         // code block
                         break;
@@ -79,7 +76,11 @@ namespace CSD480Group3Capstone001.Controllers
 
             }
             List<RepairHistory> repairs = _context.RepairHistories.ToList();
-
+            if (Unfinished != null)
+            {
+                repairs = repairs.Where(r => r.FinishDate == null).ToList();
+                ViewData["Unfinished"] = true;
+            }
             if (!String.IsNullOrEmpty(repairSearchString))
             {
                 ViewData["repairSearchString"] = repairSearchString;
