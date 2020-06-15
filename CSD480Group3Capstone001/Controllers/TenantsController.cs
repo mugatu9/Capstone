@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CSD480Group3Capstone001.Controllers
@@ -23,12 +24,13 @@ namespace CSD480Group3Capstone001.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "admin")]
         // GET: Tenants
         public async Task<IActionResult> Index()
         {
             return View(await _context.Tenants.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Tenants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -46,7 +48,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(tenant);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Tenants/Create
         public IActionResult Create()
         {
@@ -68,7 +70,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(tenant);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Tenants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,7 +86,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(tenant);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Tenants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -119,7 +121,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(tenant);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Tenants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -137,7 +139,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(tenant);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Tenants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -212,7 +214,7 @@ namespace CSD480Group3Capstone001.Controllers
                         //get all the units with a unit number that match the search string
                         var unitIds = _context.Units.Where(u => u.UnitNumber.ToLower().Contains(searchString)).Select(u=>u.UnitID).ToList();
                         //get all the tenant ids that live in those units
-                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID)).Select(tu => tu.TenantID).ToList();
+                        tenantIds = _context.TenantUnits.Where(tu => unitIds.Contains(tu.UnitID) && DateTime.Compare(tu.MovedOutDate,DateTime.Now) > 0).Select(tu => tu.TenantID).ToList();
                         //get only the tenants that have tenant ids in the ids from above
                         tenants = tenants.Where(t => tenantIds.Contains(t.TenantID)).ToList();
                         break;

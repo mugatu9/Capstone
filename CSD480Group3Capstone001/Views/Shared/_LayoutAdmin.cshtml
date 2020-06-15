@@ -46,8 +46,8 @@
                                     View
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Tenants"
-                                       asp-action="Search">User View</a>
+                                    <a class="dropdown-item" asp-controller="Overview"
+                                       asp-action="Index">User View</a>
                                     <a class="dropdown-item" asp-controller="Tenants"
                                        asp-action="Index">Admin View</a>
                                 </div>
@@ -58,7 +58,7 @@
                         {
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tenants" asp-action="Search">User View</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Overview" asp-action="Index">User View</a>
                             </li>
                         }
 
@@ -100,7 +100,7 @@
                 {
                     <div id="Buildings" class="p-2 flex-grow-1 border rounded border-dark bg-secondary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Index">Buildings</a></div>
                 }
-                if (ViewData["Title"].Equals("ContractorIndex"))
+                if (ViewData["Title"].Equals("ContractorsIndex"))
                 {
                     <div id="Contractors" class="p-2 flex-grow-1 border rounded border-dark bg-primary ml-1 mr-1 mb-1"><a class="text-center nav-link text-light" asp-area="" asp-controller="Contractors" asp-action="Index">Contractors</a></div>
                 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -18,14 +19,14 @@ namespace CSD480Group3Capstone001.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Units
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Units.Include(u => u.Building);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Units/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,14 +45,14 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(unit);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Units/Create
         public IActionResult Create()
         {
             ViewData["BuildingID"] = new SelectList(_context.Buildings, "BuildingID", "BuildingID");
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Units/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -70,7 +71,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["BuildingID"] = new SelectList(_context.Buildings, "BuildingID", "BuildingID", unit.BuildingID);
             return View(unit);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Units/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -88,7 +89,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["BuildingID"] = new SelectList(_context.Buildings, "BuildingID", "BuildingID", unit.BuildingID);
             return View(unit);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Units/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,7 +128,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["BuildingID"] = new SelectList(_context.Buildings, "BuildingID", "BuildingID", unit.BuildingID);
             return View(unit);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Units/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -146,7 +147,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(unit);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Units/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -163,12 +164,12 @@ namespace CSD480Group3Capstone001.Controllers
             return _context.Units.Any(e => e.UnitID == id);
         }
 
-
+    
         private static readonly List<string> SearchAreas = new List<string>()
         {
             "Tenant Name", "License Plate", "Unit", "Building Address"
         }; //this is where you put more option for the drop down
-
+    
         // GET: Tenants/Search
         public IActionResult Search()
         {

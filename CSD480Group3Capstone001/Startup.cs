@@ -42,6 +42,7 @@ namespace CSD480Group3Capstone001
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

@@ -35,7 +35,7 @@ namespace CSD480Group3Capstone001.Controllers
 
         private static readonly List<string> SearchContractorAreas = new List<string>() { "Specialty", "Company" };//this is where you put more option for the drop down
 
-        private static readonly List<string> SearchWorkOrderAreas = new List<string>() { "Company" };//this is where you put more option for the drop down
+        private static readonly List<string> SearchWorkOrderAreas = new List<string>() { "Company", "Building" };//this is where you put more option for the drop down
   
         // POST: Tenants/Search
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -98,6 +98,10 @@ namespace CSD480Group3Capstone001.Controllers
                     case "Company":
                         var conIds = _context.Contractors.Where(c => c.Company.ToLower().Contains(repairSearchString)).Select(c=>c.ContractorID).ToList();
                         repairs = repairs.Where(r => conIds.Contains(r.ContractorID)).ToList();
+                        break;
+                    case "Building":
+                        var buildingIds = _context.Buildings.Where(r => r.Address.ToLower().Contains(repairSearchString)).Select(b=>b.BuildingID).ToList();
+                        repairs = repairs.Where(r => buildingIds.Contains((int)r.BuidlingID)).ToList();
                         break;
                     default:
                         // code block

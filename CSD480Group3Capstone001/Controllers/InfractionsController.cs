@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -18,14 +19,14 @@ namespace CSD480Group3Capstone001.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Infractions
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Infractions.Include(i => i.Tenant);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Infractions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,14 +45,14 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(infraction);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Infractions/Create
         public IActionResult Create()
         {
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID");
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Infractions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -68,7 +69,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID", infraction.TenantID);
             return View(infraction);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Infractions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,7 +86,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID", infraction.TenantID);
             return View(infraction);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Infractions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,7 +122,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID", infraction.TenantID);
             return View(infraction);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Infractions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +141,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(infraction);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Infractions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -151,7 +152,7 @@ namespace CSD480Group3Capstone001.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "admin")]
         private bool InfractionExists(int id)
         {
             return _context.Infractions.Any(e => e.InfractionID == id);

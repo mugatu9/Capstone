@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -18,13 +19,13 @@ namespace CSD480Group3Capstone001.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Buildings
         public async Task<IActionResult> Index()
         {
             return View(await _context.Buildings.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Buildings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,13 +43,13 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(building);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Buildings/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Buildings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,7 +65,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(building);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Buildings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -80,7 +81,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(building);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Buildings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,7 +116,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(building);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Buildings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -133,7 +134,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(building);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Buildings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -144,7 +145,7 @@ namespace CSD480Group3Capstone001.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "admin")]
         private bool BuildingExists(int id)
         {
             return _context.Buildings.Any(e => e.BuildingID == id);

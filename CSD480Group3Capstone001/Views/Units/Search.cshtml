@@ -56,20 +56,22 @@
                     </select>
                 </div>
                 <br />
-                <div class="form-check ml-2">
-                    @{
-                        if (ViewData["VacantUnitsOnly"] != null && (bool)ViewData["VacantUnitsOnly"])
-                        {
-                            <input class="form-check-input" type="checkbox" value="Checked" checked name="VacantUnitsOnly" id="VacantUnitsOnly">
+                <div class="d-flex col-12 flex-fill m-1 ml-5">
+                    <div class="form-check ml-2">
+                        @{
+                            if (ViewData["VacantUnitsOnly"] != null && (bool)ViewData["VacantUnitsOnly"])
+                            {
+                                <input class="form-check-input" type="checkbox" value="Checked" checked name="VacantUnitsOnly" id="VacantUnitsOnly">
+                            }
+                            else
+                            {
+                                <input class="form-check-input" type="checkbox" value="Checked" name="VacantUnitsOnly" id="VacantUnitsOnly">
+                            }
                         }
-                        else
-                        {
-                            <input class="form-check-input" type="checkbox" value="Checked" name="VacantUnitsOnly" id="VacantUnitsOnly">
-                        }
-                    }
-                    <label class="form-check-label" for="VacantUnitsOnly">
-                        Display Unoccupied Units Only
-                    </label>
+                        <label class="form-check-label" for="VacantUnitsOnly">
+                            Display Unoccupied Units Only
+                        </label>
+                    </div>
                 </div>
             </div>
         </form>
