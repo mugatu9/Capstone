@@ -34,7 +34,7 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"68a831e5f2e61e7ff289c9336ebc9e612154f65a", @"/Views/ContractorsPage/_DisplayContractor.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b84f6cdf9f28b937e6ee447ec9f2a02f1e99e744", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"709983a7153eab3563b50021aa9fef6ab9036835", @"/Views/_ViewImports.cshtml")]
     public class Views_ContractorsPage__DisplayContractor : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<CSD480Group3Capstone001.Models.Contractor>
     {
         #pragma warning disable 1998

@@ -18,7 +18,6 @@ namespace CSD480Group3Capstone001.Data
                // return;
             }
 
-
             var buildings = new Building[]
             {
                 new Building {Address = "503 7th Ave", City = "Kirkland", State = "WA", Zip = 98033, OrgName = "Kirkland Property Group", TaxParcelNumber = 9517200430},

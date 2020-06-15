@@ -1,0 +1,32 @@
+﻿@model CSD480Group3Capstone001.Models.UserTabViewModel
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h2> Admin View</h2>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="@(Model.ActiveTab == CSD480Group3Capstone001.Models.Tab.Tenant ? "active": string.Empty )"<a asp-route-tabname="Tenant" asp-action="SwitchToTabs">Tenant</a></li>
+    <li role="presentation" class="@(Model.ActiveTab == CSD480Group3Capstone001.Models.Tab.Building ? "active": string.Empty )"<a asp-route-tabname="Building" asp-action="SwitchToTabs">Building</a></li>
+    <li role="presentation" class="@(Model.ActiveTab == CSD480Group3Capstone001.Models.Tab.Tenant ? "active": string.Empty )"<a asp-route-tabname="Vehicle" asp-action="SwitchToTabs">Vehicle</a></li>
+</ul>
+
+@switch (Model.ActiveTab)
+{
+    case CSD480Group3Capstone001.Models.Tab.Tenant:
+        @await Component.InvokeAsync("Tenant");
+        break;
+
+    case CSD480Group3Capstone001.Models.Tab.Building:
+        @await Component.InvokeAsync("Building");
+        break;
+
+    case CSD480Group3Capstone001.Models.Tab.Vehicle:
+        @await Component.InvokeAsync("Vehicle");
+        break;
+
+    default:
+        break;
+
+}
+
