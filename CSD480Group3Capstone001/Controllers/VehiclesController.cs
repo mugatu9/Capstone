@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -18,14 +19,14 @@ namespace CSD480Group3Capstone001.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Vehicles
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Vehicles.Include(v => v.Tenant);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,14 +45,14 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(vehicle);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Vehicles/Create
         public IActionResult Create()
         {
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID");
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Vehicles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -68,7 +69,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID", vehicle.TenantID);
             return View(vehicle);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Vehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,7 +86,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID", vehicle.TenantID);
             return View(vehicle);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Vehicles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,7 +122,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["TenantID"] = new SelectList(_context.Tenants, "TenantID", "TenantID", vehicle.TenantID);
             return View(vehicle);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +141,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(vehicle);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Vehicles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

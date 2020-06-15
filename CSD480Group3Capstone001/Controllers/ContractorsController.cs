@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -18,13 +19,13 @@ namespace CSD480Group3Capstone001.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Contractors
         public async Task<IActionResult> Index()
         {
             return View(await _context.Contractors.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Contractors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,13 +43,13 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(contractor);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Contractors/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Contractors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,7 +65,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(contractor);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Contractors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -80,7 +81,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(contractor);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Contractors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,7 +116,7 @@ namespace CSD480Group3Capstone001.Controllers
             }
             return View(contractor);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Contractors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -133,7 +134,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(contractor);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Contractors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

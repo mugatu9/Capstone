@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD480Group3Capstone001.Data;
 using CSD480Group3Capstone001.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD480Group3Capstone001.Controllers
 {
@@ -18,14 +19,14 @@ namespace CSD480Group3Capstone001.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "admin")]
         // GET: RepairHistories
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.RepairHistories.Include(r => r.Contractor).Include(r => r.Unit);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles = "admin")]
         // GET: RepairHistories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +46,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(repairHistory);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: RepairHistories/Create
         public IActionResult Create()
         {
@@ -53,7 +54,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["UnitID"] = new SelectList(_context.Units, "UnitID", "UnitID");
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         // POST: RepairHistories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -71,7 +72,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["UnitID"] = new SelectList(_context.Units, "UnitID", "UnitID", repairHistory.UnitID);
             return View(repairHistory);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: RepairHistories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -89,7 +90,7 @@ namespace CSD480Group3Capstone001.Controllers
             ViewData["UnitID"] = new SelectList(_context.Units, "UnitID", "UnitID", repairHistory.UnitID);
             return View(repairHistory);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: RepairHistories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -146,7 +147,7 @@ namespace CSD480Group3Capstone001.Controllers
 
             return View(repairHistory);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: RepairHistories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -157,7 +158,7 @@ namespace CSD480Group3Capstone001.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "admin")]
         private bool RepairHistoryExists(int id)
         {
             return _context.RepairHistories.Any(e => e.ContractorID == id);

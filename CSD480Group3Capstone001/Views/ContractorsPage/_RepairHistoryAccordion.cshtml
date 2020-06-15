@@ -30,11 +30,15 @@
                         <div class="p-2 text-center">
                             <span class="font-weight-bold">Unit</span>
                             <br />@{
-                                      if (repair.Unit != null)
-                                      {
-                                          @repair.Unit.UnitNumber
-                                      }
-                                  }
+                                if (repair.Unit != null)
+                                {
+                                    @repair.Unit.UnitNumber
+                                }
+                                else
+                                {
+                                    <span>No Unit</span>
+                                }
+                            }
                         </div>
                         <div class="p-2 ml-auto align-self-center">
                             <button id="@GetAccordionId("rexpand",index)" class="btn-sm border border-dark btn-primary d-inline" type="button" aria-expanded="false" data-toggle="collapse" data-target="#@GetAccordionId("rbody",index),@GetAccordionId("rexpand",index),@GetAccordionId("rhide",index)" aria-controls="@GetAccordionId("rbody",index)">Expand</button>
