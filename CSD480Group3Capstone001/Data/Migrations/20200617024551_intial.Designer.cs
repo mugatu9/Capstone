@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSD480Group3Capstone001.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200614004739_UpdateTenantUnits")]
-    partial class UpdateTenantUnits
+    [Migration("20200617024551_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,17 @@ namespace CSD480Group3Capstone001.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("AppraisedValue")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrgName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -59,6 +65,9 @@ namespace CSD480Group3Capstone001.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Company")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Specialty")
@@ -180,6 +189,9 @@ namespace CSD480Group3Capstone001.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Salary")
