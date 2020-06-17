@@ -42,13 +42,13 @@ namespace CSD480Group3Capstone001
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddMvc(config =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                             .RequireAuthenticatedUser()
-                             .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
-            });
+//            services.AddMvc(config =>
+//{
+ //               var policy = new AuthorizationPolicyBuilder()
+//                             .RequireAuthenticatedUser()
+ //                            .Build();
+//                config.Filters.Add(new AuthorizeFilter(policy));
+//            });
             services.AddRazorPages();
         }
 

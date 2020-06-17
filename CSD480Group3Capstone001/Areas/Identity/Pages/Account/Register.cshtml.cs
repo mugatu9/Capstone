@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CSD480Group3Capstone001.Areas.Identity.Pages.Account
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

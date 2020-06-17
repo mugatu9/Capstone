@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CSD480Group3Capstone001.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class RoleController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
